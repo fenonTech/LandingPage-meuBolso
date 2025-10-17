@@ -1,0 +1,42 @@
+import { useScrollAnimation } from '../hooks/useScrollAnimation'
+
+export default function WhatsAppPay() {
+  const [sectionRef, isVisible] = useScrollAnimation(0.2)
+
+  return (
+    <section ref={sectionRef} className="bg-black min-h-screen relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="flex flex-col items-center justify-center min-h-screen text-center py-10 sm:py-20">
+          {/* Main heading */}
+          <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight max-w-4xl transition-all duration-1000 px-4 ${isVisible ? 'animate-fade-in-up' : 'opacity-0 transform translate-y-8'}`}>
+            Bate-papo com seu Dinheiro<br />
+            <span className="text-yellow-400">Diretamente pelo WhatsApp</span>
+          </h1>
+          
+          {/* Subtitle */}
+          <p className={`text-base sm:text-lg text-gray-300 mb-12 sm:mb-16 leading-relaxed max-w-2xl transition-all duration-1000 delay-200 px-4 ${isVisible ? 'animate-fade-in-up' : 'opacity-0 transform translate-y-8'}`}>
+            O Meu Bolso te dá aquela ajuda sincera pra você organizar as
+            <span className="hidden sm:inline"><br /></span>
+            <span className="sm:hidden"> </span>
+            finanças onde estiver.
+          </p>
+          
+          {/* Phone with yellow background */}
+          <div className={`relative transition-all duration-1200 delay-400 ${isVisible ? 'animate-scale-in' : 'opacity-0 transform scale-75'}`}>
+            {/* Yellow background rectangle */}
+            <div className="bg-yellow-400 rounded-2xl sm:rounded-3xl w-80 sm:w-96 lg:w-[500px] h-48 sm:h-64 lg:h-80 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0"></div>
+            
+            {/* Phone image */}
+            <div className="relative z-10 transform rotate-12 animate-float">
+              <img 
+                src="/celular.png" 
+                alt="Celular com WhatsApp" 
+                className="w-64 sm:w-80 lg:w-96 h-auto"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
