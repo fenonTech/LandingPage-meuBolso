@@ -1,6 +1,6 @@
 export default function Hero({ onOpenCreateAccount }) {
   return (
-    <section className="bg-black  min-h-lvh sm:min-h-screen relative overflow-hidden">
+    <section className="bg-black min-h-screen relative overflow-hidden">
       {/* Background elements */}
       <div className=" inset-0 pointer-events-none">
         {/* Floating card on the left - otimizado mobile */}
@@ -14,7 +14,7 @@ export default function Hero({ onOpenCreateAccount }) {
       </div>
 
       {/* Floating safe/vault on the right - otimizado mobile */}
-      <div className="absolute -right-2 sm:-right-4 md:-right-10 bottom-[20%] sm:bottom-12 md:bottom-16 z-50 animate-fade-in-right animate-pulse-slow pointer-events-none">
+      <div className="absolute -right-2 sm:-right-4 md:-right-10 bottom-[20%] sm:bottom-12 md:bottom-16 z-10 animate-fade-in-right animate-pulse-slow pointer-events-none">
         <div className="relative">
           <img
             src="/imgs/cofrepng.png"
@@ -25,7 +25,7 @@ export default function Hero({ onOpenCreateAccount }) {
       </div>
 
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex flex-col items-center justify-start sm:justify-center h-auto sm:min-h-screen text-center pt-32 pb-12 sm:py-20">
+        <div className="flex flex-col items-center justify-start sm:justify-center min-h-screen text-center pt-32 pb-4 sm:py-20">
           {/* Main heading - otimizado mobile */}
           <h1
             className="text-[2rem] leading-tight sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-5 sm:mb-6 max-w-4xl animate-fade-in-up px-2"

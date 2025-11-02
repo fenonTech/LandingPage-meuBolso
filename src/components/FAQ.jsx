@@ -8,24 +8,28 @@ export default function FAQ() {
   const faqs = [
     {
       question: "O que é o Open Finance?",
-      answer: "",
+      answer:
+        "Open Finance é um sistema seguro autorizado pelo Banco Central que permite compartilhar seus dados financeiros entre diferentes instituições de forma protegida. Com ele, o Meu Bolso consegue acessar suas informações bancárias diretamente, sem necessidade de enviar extratos manualmente.",
     },
     {
       question: "Posso conectar mais de um banco?",
-      answer: "",
+      answer:
+        "Sim! Você pode conectar até 5 bancos simultaneamente ao Meu Bolso. Nossa plataforma suporta múltiplas conexões bancárias, permitindo que você visualize todas as suas contas em um único lugar, facilitando o controle total das suas finanças.",
     },
     {
       question: "Preciso fornecer minhas senhas bancárias ao Meu Bolso?",
-      answer: "",
+      answer:
+        "Não! Você nunca precisa fornecer suas senhas bancárias. Nos conectamos diretamente através do Open Finance, que é um sistema seguro e autorizado pelo Banco Central. A autenticação é feita diretamente no aplicativo do seu banco, garantindo total segurança.",
     },
     {
       question: "O Meu Bolso consegue efetuar transações e pagamentos?",
-      answer: "",
+      answer:
+        "Não. O Meu Bolso é uma ferramenta de gestão e análise financeira. Nós apenas consultamos e organizamos suas informações bancárias através do Open Finance. Não realizamos transferências, pagamentos ou qualquer tipo de transação. Sua segurança é nossa prioridade.",
     },
     {
       question: "Preciso configurar ou instalar algo no app do meu banco?",
       answer:
-        "Não. O Meu Bolso usa o Open Finance, uma tecnologia autorizada pelo Banco Central, que permite integração segura sem necessidade de instalar nada nos apps dos bancos. Você só precisa autorizar o acesso aos seus dados financeiros uma vez, e o Pierre fará o resto automaticamente.",
+        "Não. O Meu Bolso usa o Open Finance, uma tecnologia autorizada pelo Banco Central, que permite integração segura sem necessidade de instalar nada nos apps dos bancos. Você só precisa autorizar o acesso aos seus dados financeiros uma vez, e o Meu Bolso fará o resto automaticamente.",
     },
   ];
 
@@ -52,7 +56,7 @@ export default function FAQ() {
           {/* Main heading */}
           <div className="text-center mb-10 sm:mb-12">
             <h1
-              className={`text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight transition-all duration-1000 delay-200 px-4 ${
+              className={`text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight transition-all duration-1000 delay-100 px-4 ${
                 isVisible
                   ? "animate-fade-in-up"
                   : "opacity-0 transform translate-y-8"
@@ -63,7 +67,7 @@ export default function FAQ() {
               <span className="text-yellow-400">Perguntas Frequentes</span>
             </h1>
             <p
-              className={`text-sm sm:text-lg text-gray-300 max-w-3xl mx-auto transition-all duration-1000 delay-400 px-4 leading-relaxed ${
+              className={`text-sm sm:text-lg text-gray-300 max-w-3xl mx-auto transition-all duration-1000 delay-200 px-4 leading-relaxed ${
                 isVisible
                   ? "animate-fade-in-up"
                   : "opacity-0 transform translate-y-8"
@@ -127,7 +131,7 @@ export default function FAQ() {
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-12 items-center">
             {/* Left Content */}
             <div
-              className={`lg:col-span-3 text-center lg:text-left transition-all duration-1000 delay-1200 ${
+              className={`lg:col-span-3 text-center lg:text-left transition-all duration-1000 delay-600 ${
                 isVisible
                   ? "animate-fade-in-left"
                   : "opacity-0 transform translate-x-[-30px]"
@@ -152,7 +156,7 @@ export default function FAQ() {
 
             {/* Right Content - Features List */}
             <div
-              className={`lg:col-span-2 space-y-4 transition-all duration-1000 delay-1400 ${
+              className={`lg:col-span-2 space-y-4 transition-all duration-1000 delay-700 ${
                 isVisible
                   ? "animate-fade-in-right"
                   : "opacity-0 transform translate-x-[30px]"

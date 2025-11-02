@@ -5,7 +5,7 @@ export default function OpenFinance() {
       className="bg-black min-h-screen relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex flex-col items-center justify-center min-h-screen text-center py-10 sm:py-20">
+        <div className="flex flex-col items-center justify-center min-h-screen text-center py-8 sm:py-20">
           {/* Open Finance Badge */}
           <div className="bg-yellow-400 text-black px-4 py-2 rounded-full font-bold text-sm mb-8">
             Open Finance
