@@ -5,7 +5,7 @@ export default function Header({ onOpenCreateAccount, onOpenLogin }) {
         <div className="flex items-center justify-between h-16 sm:h-20">
           <div className="flex items-center">
             <img
-              src="/imgs/logoHeader.png"
+              src="../imgs/logoHeader.png"
               alt="MEU BOLSO"
               className="h-8 sm:h-10 w-auto"
             />
