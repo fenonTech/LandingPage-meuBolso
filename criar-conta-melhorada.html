@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meu Bolso - Criar Conta Melhorada</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        background-color: #000000;
+        color: white;
+        font-family: "Inter", system-ui, sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-black">
+    <div id="app">
+      <!-- Main Landing Page -->
+      <div id="mainPage" class="min-h-screen">
+        <!-- Header -->
+        <header class="bg-black relative z-10">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+              <div class="flex items-center">
+                <div
+                  class="w-10 h-10 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-lg flex items-center justify-center mr-3"
+                >
+                  <svg
+                    class="w-6 h-6 text-black"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+                    />
+                  </svg>
+                </div>
+                <span class="text-xl font-bold text-yellow-400">MEU BOLSO</span>
+              </div>
+              <div class="flex items-center space-x-4">
+                <button
+                  onclick="showCreateAccount()"
+                  class="text-white hover:text-yellow-400 transition-colors font-medium"
+                >
+                  Criar conta
+                </button>
+                <button
+                  class="bg-yellow-400 hover:bg-yellow-300 text-black px-6 py-2 rounded-lg font-bold transition-colors"
+                >
+                  Login
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Hero Section -->
+        <main class="min-h-screen flex items-center justify-center">
+          <div class="text-center">
+            <h1 class="text-5xl font-bold text-white mb-6">
+              Seu assistente de IA<br />
+              <span class="text-yellow-400">Pessoal de Finanças</span>
+            </h1>
+            <p class="text-xl text-gray-300 mb-8 max-w-2xl">
+              Com o Meu Bolso você entende, acompanha e planeja seu dinheiro de
+              forma simples, sem planilhas.
+            </p>
+            <button
+              onclick="showCreateAccount()"
+              class="bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105"
+            >
+              Começar com 5 dias grátis
+            </button>
+          </div>
+        </main>
+      </div>
+
+      <!-- Create Account Full Screen -->
+      <div
+        id="createAccountPage"
+        class="min-h-screen bg-black hidden overflow-hidden"
+      >
+        <!-- Back Button -->
+        <button
+          onclick="goBack()"
+          class="absolute top-6 left-6 text-gray-400 hover:text-white transition-colors z-10 flex items-center"
+        >
+          <svg
+            class="w-6 h-6 mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+          Voltar
+        </button>
+
+        <div class="flex h-screen">
+          <!-- Left Side - Create Account Form -->
+          <div
+            class="flex-1 p-6 lg:p-12 max-w-md mx-auto flex flex-col justify-center"
+          >
+            <!-- Logo -->
+            <div class="flex items-center mb-8 mt-16 lg:mt-0">
+              <div
+                class="w-8 h-8 rounded-lg flex items-center justify-center mr-3"
+              >
+                <div
+                  class="w-8 h-8 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-lg flex items-center justify-center"
+                >
+                  <svg
+                    class="w-5 h-5 text-black"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <span class="text-xl font-bold text-yellow-400">MEU BOLSO</span>
+            </div>
+
+            <!-- Title -->
+            <div class="mb-8">
+              <h1 class="text-3xl font-bold text-white mb-3">Criar conta</h1>
+              <p class="text-gray-400 text-base leading-relaxed">
+                Crie sua conta em poucos minutos e tenha<br />
+                controle total do seu bolso
+              </p>
+            </div>
+
+            <!-- Form -->
+            <form class="space-y-4">
+              <!-- Nome -->
+              <div>
+                <label class="block text-white font-medium mb-2 text-sm"
+                  >Nome</label
+                >
+                <input
+                  type="text"
+                  placeholder="Seu nome completo"
+                  class="w-full bg-gray-800 border-0 rounded-md px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-sm"
+                />
+              </div>
+
+              <!-- Email -->
+              <div>
+                <label class="block text-white font-medium mb-2 text-sm"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  placeholder="meubolso@meubolso.com"
+                  class="w-full bg-gray-800 border-0 rounded-md px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-sm"
+                />
+              </div>
+
+              <!-- WhatsApp -->
+              <div>
+                <label class="block text-white font-medium mb-2 text-sm"
+                  >Whatsapp</label
+                >
+                <input
+                  type="text"
+                  placeholder="(11) 90000-0000"
+                  id="whatsapp-input"
+                  class="w-full bg-gray-800 border-0 rounded-md px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-sm"
+                />
+              </div>
+
+              <!-- CPF -->
+              <div>
+                <label class="block text-white font-medium mb-2 text-sm"
+                  >CPF</label
+                >
+                <input
+                  type="text"
+                  placeholder="123.456.789-00"
+                  id="cpf-input"
+                  class="w-full bg-gray-800 border-0 rounded-md px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-sm"
+                />
+              </div>
+
+              <!-- Banco -->
+              <div class="relative">
+                <label class="block text-white font-medium mb-2 text-sm"
+                  >Selecione seu banco</label
+                >
+                <select
+                  class="w-full bg-gray-800 border-0 rounded-md px-4 py-3 text-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 appearance-none cursor-pointer text-sm"
+                >
+                  <option value="">Selecione um banco</option>
+                  <option value="banco-do-brasil">Banco do Brasil</option>
+                  <option value="bradesco">Bradesco</option>
+                  <option value="caixa">Caixa Econômica Federal</option>
+                  <option value="itau">Itaú</option>
+                  <option value="santander">Santander</option>
+                  <option value="nubank">Nubank</option>
+                  <option value="inter">Banco Inter</option>
+                  <option value="c6">C6 Bank</option>
+                  <option value="next">Next</option>
+                  <option value="original">Banco Original</option>
+                  <option value="outros">Outros</option>
+                </select>
+                <div class="absolute right-4 top-10 pointer-events-none">
+                  <svg
+                    class="w-4 h-4 text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Senha -->
+              <div>
+                <label class="block text-white font-medium mb-2 text-sm"
+                  >Crie uma senha segura</label
+                >
+                <div class="relative">
+                  <input
+                    type="password"
+                    placeholder="Mínimo 8 caracteres"
+                    class="w-full bg-gray-800 border-0 rounded-md px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 pr-12 text-sm"
+                  />
+                  <button
+                    type="button"
+                    class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+                  >
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.543 7-1.275 4.057-5.066 7-9.543 7-4.477 0-8.268-2.943-9.542-7z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Confirmar Senha -->
+              <div>
+                <label class="block text-white font-medium mb-2 text-sm"
+                  >Confirme sua senha</label
+                >
+                <div class="relative">
+                  <input
+                    type="password"
+                    placeholder="Digite a senha novamente"
+                    class="w-full bg-gray-800 border-0 rounded-md px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 pr-12 text-sm"
+                  />
+                  <button
+                    type="button"
+                    class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+                  >
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.543 7-1.275 4.057-5.066 7-9.543 7-4.477 0-8.268-2.943-9.542-7z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <button
+                type="submit"
+                class="w-full bg-gray-300 hover:bg-gray-200 text-black font-semibold py-3 rounded-md transition-colors mt-6 text-sm"
+              >
+                Criar conta gratuita
+              </button>
+
+              <!-- Switch to Login -->
+              <div class="text-center mt-4">
+                <p class="text-gray-400 text-sm">
+                  Já tem uma conta?
+                  <button
+                    type="button"
+                    class="text-white hover:text-yellow-400 transition-colors underline"
+                  >
+                    Entrar
+                  </button>
+                </p>
+              </div>
+            </form>
+          </div>
+
+          <!-- Right Side - Phone Mockup -->
+          <div
+            class="hidden lg:flex flex-1 items-center justify-center bg-black p-8 relative"
+          >
+            <div class="relative">
+              <!-- Mockup do celular com perspectiva -->
+              <div
+                class="w-72 h-[580px] relative transform rotate-12 translate-x-8"
+              >
+                <!-- Sombra do telefone -->
+                <div
+                  class="absolute inset-0 bg-black opacity-30 rounded-[2.5rem] transform translate-x-2 translate-y-2 blur-xl"
+                ></div>
+
+                <!-- Telefone -->
+                <div
+                  class="relative w-full h-full bg-gray-900 rounded-[2.5rem] p-2 shadow-2xl border border-gray-700"
+                >
+                  <div
+                    class="w-full h-full bg-black rounded-[2rem] relative overflow-hidden"
+                  >
+                    <!-- Status bar -->
+                    <div
+                      class="absolute top-0 left-0 right-0 h-8 bg-black flex items-center justify-between px-4 text-xs text-white z-10"
+                    >
+                      <span>9:41</span>
+                      <div class="flex items-center space-x-1">
+                        <!-- Bateria -->
+                        <div
+                          class="w-6 h-3 border border-white rounded-sm flex items-center"
+                        >
+                          <div class="w-4 h-2 bg-white rounded-sm ml-0.5"></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Conteúdo do app -->
+                    <div
+                      class="pt-8 p-4 h-full bg-gradient-to-b from-gray-900 to-black"
+                    >
+                      <!-- Header do app -->
+                      <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                          <div
+                            class="w-6 h-6 bg-yellow-400 rounded-md flex items-center justify-center mr-2"
+                          >
+                            <span class="text-black text-xs font-bold">₿</span>
+                          </div>
+                          <span class="text-white font-bold text-sm"
+                            >Meu Bolso</span
+                          >
+                        </div>
+                        <div class="w-6 h-6 bg-gray-700 rounded-full"></div>
+                      </div>
+
+                      <!-- Cards de transações simulando o app real -->
+                      <div class="space-y-2 mt-8">
+                        <!-- Card principal -->
+                        <div class="bg-green-600 rounded-xl p-4 text-white">
+                          <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs opacity-80"
+                              >Disponível para saque</span
+                            >
+                            <div
+                              class="w-4 h-4 bg-white bg-opacity-20 rounded-full"
+                            ></div>
+                          </div>
+                          <p class="text-lg font-bold">R$ 2.847,52</p>
+                          <div class="flex mt-3 space-x-2">
+                            <button
+                              class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-xs"
+                            >
+                              Depositar
+                            </button>
+                            <button
+                              class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-xs"
+                            >
+                              Pix
+                            </button>
+                          </div>
+                        </div>
+
+                        <!-- Lista de transações -->
+                        <div class="bg-gray-800 rounded-xl p-3">
+                          <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center">
+                              <div
+                                class="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center mr-2"
+                              >
+                                <span class="text-white text-xs">💰</span>
+                              </div>
+                              <div>
+                                <p class="text-white text-xs font-medium">
+                                  Essa transferência vale pontos
+                                </p>
+                                <p class="text-gray-400 text-xs">
+                                  Vamos destravá-los?
+                                </p>
+                              </div>
+                            </div>
+                            <p class="text-white text-xs">R$ 150,00</p>
+                          </div>
+                        </div>
+
+                        <div class="bg-gray-800 rounded-xl p-3">
+                          <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                              <div
+                                class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center mr-2"
+                              >
+                                <span class="text-white text-xs">🏦</span>
+                              </div>
+                              <div>
+                                <p class="text-white text-xs font-medium">
+                                  Sua transferência foi
+                                </p>
+                                <p class="text-gray-400 text-xs">compensada</p>
+                              </div>
+                            </div>
+                            <p class="text-green-400 text-xs">+R$ 850,00</p>
+                          </div>
+                        </div>
+
+                        <div class="bg-gray-800 rounded-xl p-3">
+                          <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                              <div
+                                class="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center mr-2"
+                              >
+                                <span class="text-white text-xs">🛒</span>
+                              </div>
+                              <div>
+                                <p class="text-white text-xs font-medium">
+                                  Tá na conta nossa cada
+                                </p>
+                                <p class="text-gray-400 text-xs">
+                                  compra que você faz !
+                                </p>
+                              </div>
+                            </div>
+                            <p class="text-red-400 text-xs">-R$ 245,80</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Texto promocional -->
+              <div
+                class="absolute -bottom-20 left-1/2 transform -translate-x-1/2 text-center"
+              >
+                <p class="text-gray-400 text-base whitespace-nowrap">
+                  Comece sua jornada de economia!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function showCreateAccount() {
+        document.getElementById("mainPage").classList.add("hidden");
+        document.getElementById("createAccountPage").classList.remove("hidden");
+      }
+
+      function goBack() {
+        document.getElementById("createAccountPage").classList.add("hidden");
+        document.getElementById("mainPage").classList.remove("hidden");
+      }
+
+      // Auto-format inputs
+      document.addEventListener("input", function (e) {
+        if (e.target.id === "cpf-input") {
+          let value = e.target.value.replace(/\D/g, "");
+          value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+          e.target.value = value;
+        }
+
+        if (e.target.id === "whatsapp-input") {
+          let value = e.target.value.replace(/\D/g, "");
+          value = value.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+          e.target.value = value;
+        }
+      });
+
+      // Keyboard navigation
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          goBack();
+        }
+      });
+    </script>
+  </body>
+</html>

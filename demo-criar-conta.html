@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meu Bolso - Criar Conta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        background-color: #0a0a0a;
+        color: white;
+        font-family: "Inter", system-ui, sans-serif;
+      }
+
+      .dark-900 {
+        background-color: #0a0a0a;
+      }
+      .dark-800 {
+        background-color: #1a1a1a;
+      }
+      .dark-700 {
+        background-color: #2a2a2a;
+      }
+
+      @keyframes scaleIn {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .animate-scale-in {
+        animation: scaleIn 0.6s ease-out forwards;
+      }
+    </style>
+  </head>
+  <body class="bg-black">
+    <div id="app">
+      <!-- Header -->
+      <header class="bg-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center justify-between h-20">
+            <div class="flex items-center">
+              <div
+                class="w-10 h-10 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-lg flex items-center justify-center mr-3"
+              >
+                <svg
+                  class="w-6 h-6 text-black"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+                  />
+                </svg>
+              </div>
+              <span class="text-xl font-bold text-yellow-400">MEU BOLSO</span>
+            </div>
+            <div class="flex items-center space-x-4">
+              <button
+                onclick="toggleCreateAccount()"
+                class="text-white hover:text-yellow-400 transition-colors font-medium"
+              >
+                Criar conta
+              </button>
+              <button
+                class="bg-yellow-400 hover:bg-yellow-300 text-black px-6 py-2 rounded-lg font-bold transition-colors"
+              >
+                Login
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Create Account Modal -->
+      <div
+        id="createAccountModal"
+        class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4 hidden"
+      >
+        <div
+          class="bg-gray-900 rounded-2xl w-full max-w-6xl min-h-[600px] flex overflow-hidden animate-scale-in"
+        >
+          <!-- Close Button -->
+          <button
+            onclick="toggleCreateAccount()"
+            class="absolute top-6 right-6 text-gray-400 hover:text-white transition-colors z-10"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+
+          <!-- Left Side - Form -->
+          <div class="flex-1 p-8 lg:p-12">
+            <!-- Logo -->
+            <div class="flex items-center mb-8">
+              <div
+                class="w-10 h-10 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-lg flex items-center justify-center mr-3"
+              >
+                <svg
+                  class="w-6 h-6 text-black"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+                  />
+                </svg>
+              </div>
+              <span class="text-xl font-bold text-white">MEU BOLSO</span>
+            </div>
+
+            <!-- Title -->
+            <div class="mb-8">
+              <h1 class="text-4xl font-bold text-white mb-4">Criar conta</h1>
+              <p class="text-gray-400 text-lg">
+                Crie sua conta em poucos minutos e tenha<br />
+                controle total do seu bolso
+              </p>
+            </div>
+
+            <!-- Form -->
+            <form class="space-y-6">
+              <!-- Nome -->
+              <div>
+                <label class="block text-white font-medium mb-2">Nome</label>
+                <input
+                  type="text"
+                  placeholder="Seu nome completo"
+                  class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 transition-colors"
+                />
+              </div>
+
+              <!-- Email -->
+              <div>
+                <label class="block text-white font-medium mb-2">Email</label>
+                <input
+                  type="email"
+                  placeholder="meubolso@meubolso.com"
+                  class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 transition-colors"
+                />
+              </div>
+
+              <!-- WhatsApp -->
+              <div>
+                <label class="block text-white font-medium mb-2"
+                  >Whatsapp</label
+                >
+                <input
+                  type="text"
+                  placeholder="(11) 90000-0000"
+                  class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 transition-colors"
+                />
+              </div>
+
+              <!-- CPF -->
+              <div>
+                <label class="block text-white font-medium mb-2">CPF</label>
+                <input
+                  type="text"
+                  placeholder="123.456.789-00"
+                  class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 transition-colors"
+                />
+              </div>
+
+              <!-- Banco -->
+              <div class="relative">
+                <label class="block text-white font-medium mb-2"
+                  >Selecione seu banco</label
+                >
+                <select
+                  class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-yellow-400 transition-colors appearance-none cursor-pointer"
+                >
+                  <option value="">Selecione um banco</option>
+                  <option value="banco-do-brasil">Banco do Brasil</option>
+                  <option value="bradesco">Bradesco</option>
+                  <option value="caixa">Caixa Econômica Federal</option>
+                  <option value="itau">Itaú</option>
+                  <option value="santander">Santander</option>
+                  <option value="nubank">Nubank</option>
+                  <option value="inter">Banco Inter</option>
+                  <option value="c6">C6 Bank</option>
+                  <option value="next">Next</option>
+                  <option value="original">Banco Original</option>
+                  <option value="outros">Outros</option>
+                </select>
+                <div class="absolute right-4 top-11 pointer-events-none">
+                  <svg
+                    class="w-5 h-5 text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Senha -->
+              <div>
+                <label class="block text-white font-medium mb-2"
+                  >Crie uma senha segura</label
+                >
+                <div class="relative">
+                  <input
+                    type="password"
+                    placeholder="Mínimo 8 caracteres"
+                    class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 transition-colors pr-12"
+                  />
+                  <button
+                    type="button"
+                    class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+                  >
+                    <svg
+                      class="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.543 7-1.275 4.057-5.066 7-9.543 7-4.477 0-8.268-2.943-9.542-7z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Confirmar Senha -->
+              <div>
+                <label class="block text-white font-medium mb-2"
+                  >Confirme sua senha</label
+                >
+                <div class="relative">
+                  <input
+                    type="password"
+                    placeholder="Digite a senha novamente"
+                    class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400 transition-colors pr-12"
+                  />
+                  <button
+                    type="button"
+                    class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+                  >
+                    <svg
+                      class="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.543 7-1.275 4.057-5.066 7-9.543 7-4.477 0-8.268-2.943-9.542-7z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <button
+                type="submit"
+                class="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold py-4 rounded-lg hover:from-yellow-500 hover:to-yellow-600 transition-all duration-300 transform hover:scale-105 mt-8"
+              >
+                Criar conta gratuita
+              </button>
+
+              <!-- Login Link -->
+              <div class="text-center mt-6">
+                <p class="text-gray-400">
+                  Já tem uma conta?
+                  <button
+                    type="button"
+                    class="text-yellow-400 hover:text-yellow-300 transition-colors underline"
+                  >
+                    Entrar
+                  </button>
+                </p>
+              </div>
+            </form>
+          </div>
+
+          <!-- Right Side - Phone Mockup -->
+          <div
+            class="hidden lg:flex flex-1 items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900 p-8"
+          >
+            <div class="relative">
+              <!-- Phone Mockup -->
+              <div
+                class="w-80 h-[600px] bg-gray-800 rounded-[3rem] p-4 shadow-2xl"
+              >
+                <div
+                  class="w-full h-full bg-black rounded-[2.5rem] relative overflow-hidden"
+                >
+                  <!-- Status bar -->
+                  <div
+                    class="absolute top-0 left-0 right-0 h-8 bg-black flex items-center justify-between px-6 text-xs text-white"
+                  >
+                    <span>9:41</span>
+                    <div class="flex items-center space-x-1">
+                      <div class="w-4 h-2 border border-white rounded-sm">
+                        <div class="w-3/4 h-full bg-white rounded-sm"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- App content -->
+                  <div class="mt-8 p-4 h-full">
+                    <!-- Header do app -->
+                    <div class="flex items-center justify-between mb-6">
+                      <div class="flex items-center">
+                        <div
+                          class="w-8 h-8 bg-yellow-400 rounded-lg flex items-center justify-center mr-2"
+                        >
+                          <svg
+                            class="w-4 h-4 text-black"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                          </svg>
+                        </div>
+                        <span class="text-white font-bold">Meu Bolso</span>
+                      </div>
+                      <div class="w-6 h-6 bg-gray-600 rounded-full"></div>
+                    </div>
+
+                    <!-- Saldo -->
+                    <div class="bg-gray-800 rounded-2xl p-4 mb-4">
+                      <p class="text-gray-400 text-sm mb-1">Saldo disponível</p>
+                      <p class="text-white text-2xl font-bold">R$ 2.847,52</p>
+                    </div>
+
+                    <!-- Botões de ação -->
+                    <div class="grid grid-cols-2 gap-3 mb-6">
+                      <button
+                        class="bg-green-500 text-white py-3 rounded-xl font-semibold"
+                      >
+                        Depositar
+                      </button>
+                      <button
+                        class="bg-gray-700 text-white py-3 rounded-xl font-semibold"
+                      >
+                        Pix
+                      </button>
+                    </div>
+
+                    <!-- Lista de transações -->
+                    <div class="space-y-3">
+                      <h3 class="text-white font-semibold mb-3">
+                        Últimas transações
+                      </h3>
+
+                      <div
+                        class="flex items-center justify-between bg-gray-800 rounded-xl p-3"
+                      >
+                        <div class="flex items-center">
+                          <div
+                            class="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center mr-3"
+                          >
+                            <span class="text-white text-xs">💰</span>
+                          </div>
+                          <div>
+                            <p class="text-white font-medium text-sm">
+                              Sua transferência para João
+                            </p>
+                            <p class="text-gray-400 text-xs">Hoje às 14:30</p>
+                          </div>
+                        </div>
+                        <p class="text-green-400 font-semibold">-R$ 150,00</p>
+                      </div>
+
+                      <div
+                        class="flex items-center justify-between bg-gray-800 rounded-xl p-3"
+                      >
+                        <div class="flex items-center">
+                          <div
+                            class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center mr-3"
+                          >
+                            <span class="text-white text-xs">🏪</span>
+                          </div>
+                          <div>
+                            <p class="text-white font-medium text-sm">
+                              Depósito recebido
+                            </p>
+                            <p class="text-gray-400 text-xs">Ontem às 09:15</p>
+                          </div>
+                        </div>
+                        <p class="text-green-400 font-semibold">+R$ 850,00</p>
+                      </div>
+
+                      <div
+                        class="flex items-center justify-between bg-gray-800 rounded-xl p-3"
+                      >
+                        <div class="flex items-center">
+                          <div
+                            class="w-10 h-10 bg-purple-500 rounded-lg flex items-center justify-center mr-3"
+                          >
+                            <span class="text-white text-xs">🛒</span>
+                          </div>
+                          <div>
+                            <p class="text-white font-medium text-sm">
+                              Compra no supermercado
+                            </p>
+                            <p class="text-gray-400 text-xs">2 dias atrás</p>
+                          </div>
+                        </div>
+                        <p class="text-red-400 font-semibold">-R$ 245,80</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Promotional text -->
+              <div
+                class="absolute -bottom-16 left-1/2 transform -translate-x-1/2 text-center"
+              >
+                <p class="text-gray-400 text-lg">
+                  Comece sua jornada de economia!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main content - simplified hero -->
+      <main class="min-h-screen flex items-center justify-center">
+        <div class="text-center">
+          <h1 class="text-5xl font-bold text-white mb-6">
+            Seu assistente de IA<br />
+            <span class="text-yellow-400">Pessoal de Finanças</span>
+          </h1>
+          <p class="text-xl text-gray-300 mb-8 max-w-2xl">
+            Com o Meu Bolso você entende, acompanha e planeja seu dinheiro de
+            forma simples, sem planilhas.
+          </p>
+          <button
+            onclick="toggleCreateAccount()"
+            class="bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105"
+          >
+            Começar com 5 dias grátis
+          </button>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      function toggleCreateAccount() {
+        const modal = document.getElementById("createAccountModal");
+        modal.classList.toggle("hidden");
+      }
+
+      // Auto-format CPF
+      document.addEventListener("input", function (e) {
+        if (e.target.placeholder === "123.456.789-00") {
+          let value = e.target.value.replace(/\D/g, "");
+          value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+          e.target.value = value;
+        }
+
+        // Auto-format WhatsApp
+        if (e.target.placeholder === "(11) 90000-0000") {
+          let value = e.target.value.replace(/\D/g, "");
+          value = value.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+          e.target.value = value;
+        }
+      });
+
+      // Close modal when clicking outside
+      document
+        .getElementById("createAccountModal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) {
+            toggleCreateAccount();
+          }
+        });
+    </script>
+  </body>
+</html>
