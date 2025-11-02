@@ -30,7 +30,7 @@ export default function Dashboard() {
               }`}
             >
               <img
-                src="../imgs/dashboard.png"
+                src="/imgs/dashboard.png"
                 alt="Dashboard Financeiro"
                 className="w-full rounded-xl sm:rounded-2xl shadow-2xl hover-lift smooth-transition"
                 style={{ height: "350px", objectFit: "contain" }}
