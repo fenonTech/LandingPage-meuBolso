@@ -9,9 +9,10 @@ import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
 import CreateAccount from "./components/CreateAccount";
 import Login from "./components/Login";
+import ForgotPassword from "./components/ForgotPassword";
 
 function App() {
-  const [currentView, setCurrentView] = useState("main"); // 'main', 'login', 'createAccount'
+  const [currentView, setCurrentView] = useState("main"); // 'main', 'login', 'createAccount', 'forgotPassword'
 
   console.log("App render - currentView:", currentView);
 
@@ -23,6 +24,11 @@ function App() {
   const handleOpenLogin = () => {
     console.log("Opening Login");
     setCurrentView("login");
+  };
+
+  const handleOpenForgotPassword = () => {
+    console.log("Opening Forgot Password");
+    setCurrentView("forgotPassword");
   };
 
   const handleGoBack = () => {
@@ -37,6 +43,7 @@ function App() {
         isVisible={true}
         onClose={handleGoBack}
         onSwitchToCreateAccount={handleOpenCreateAccount}
+        onSwitchToForgotPassword={handleOpenForgotPassword}
       />
     );
   }
@@ -47,6 +54,16 @@ function App() {
         isVisible={true}
         onClose={handleGoBack}
         onSwitchToLogin={handleOpenLogin}
+      />
+    );
+  }
+
+  if (currentView === "forgotPassword") {
+    return (
+      <ForgotPassword
+        isVisible={true}
+        onClose={handleGoBack}
+        onBackToLogin={handleOpenLogin}
       />
     );
   }

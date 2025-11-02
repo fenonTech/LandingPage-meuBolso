@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Login({ isVisible, onClose, onSwitchToCreateAccount }) {
+function Login({ isVisible, onClose, onSwitchToCreateAccount, onSwitchToForgotPassword }) {
   const [formData, setFormData] = useState({
     email: "",
     senha: "",
@@ -156,6 +156,7 @@ function Login({ isVisible, onClose, onSwitchToCreateAccount }) {
               <button
                 type="button"
                 className="text-gray-400 hover:text-gray-300 transition-colors underline decoration-gray-400"
+                onClick={onSwitchToForgotPassword}
               >
                 Esqueceu a senha?
               </button>
