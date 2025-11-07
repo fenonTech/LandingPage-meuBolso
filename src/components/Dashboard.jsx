@@ -5,6 +5,7 @@ export default function Dashboard() {
 
   return (
     <section
+      id="dashboard"
       ref={sectionRef}
       className="bg-black min-h-screen relative overflow-hidden"
     >

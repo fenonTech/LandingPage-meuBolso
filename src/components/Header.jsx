@@ -27,17 +27,18 @@ export default function Header({ onOpenCreateAccount, onOpenLogin }) {
           <div className="hidden md:block">
             <nav className="flex items-center space-x-8">
               <a
+                href="#dashboard"
+                className="text-white hover:text-yellow-400 transition-colors font-medium"
+              >
+                Dashboard
+              </a>
+              <a
                 href="#whatsapp"
                 className="text-white hover:text-yellow-400 transition-colors font-medium"
               >
                 WhatsApp
               </a>
-              <a
-                href="#openfinance"
-                className="text-white hover:text-yellow-400 transition-colors font-medium"
-              >
-                Open Finance
-              </a>
+
               <a
                 href="#plans"
                 className="text-white hover:text-yellow-400 transition-colors font-medium"

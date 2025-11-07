@@ -104,7 +104,6 @@ function App() {
         <Dashboard />
       </div>
       <WhatsAppPay />
-      <OpenFinance />
       <Plans />
       <FAQ />
       <Footer />
