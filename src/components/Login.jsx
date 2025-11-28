@@ -127,8 +127,8 @@ function Login({
         (response.status === 202 || response.status === 200) &&
         data.mansagem === "valido"
       ) {
-        // Redirecionar para o dashboard externo com telefone e código no path
-        const redirectUrl = `https://www.fenontech.com.br/dashboard/index.html/#/${phoneNumber}/${fullCode}`;
+        // Redirecionar para o dashboard externo com telefone e código como query parameters
+        const redirectUrl = `https://www.fenontech.com.br/dashboard/index.html?telefone=${encodeURIComponent(phoneNumber)}&codigo=${encodeURIComponent(fullCode)}`;
         window.location.href = redirectUrl;
       } else if (response.status === 404) {
         if (data.mensagem === "invalido") {
