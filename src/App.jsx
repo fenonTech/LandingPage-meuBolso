@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Dashboard from "./components/Dashboard";
@@ -12,7 +13,7 @@ import Login from "./components/Login";
 import ForgotPassword from "./components/ForgotPassword";
 
 function App() {
-  const [currentPage, setCurrentPage] = useState("home");
+  const navigate = useNavigate();
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   // Detectar scroll para mostrar/ocultar botão
@@ -38,23 +39,19 @@ function App() {
   };
 
   const handleOpenCreateAccount = () => {
-    setCurrentPage("criar-conta");
-    scrollToTop();
+    navigate("/criar-conta");
   };
 
   const handleOpenLogin = () => {
-    setCurrentPage("login");
-    scrollToTop();
+    navigate("/login");
   };
 
   const handleOpenForgotPassword = () => {
-    setCurrentPage("esqueci-senha");
-    scrollToTop();
+    navigate("/esqueci-senha");
   };
 
   const handleGoBack = () => {
-    setCurrentPage("home");
-    scrollToTop();
+    navigate("/");
   };
 
   // Componente da página principal
@@ -99,34 +96,41 @@ function App() {
   );
 
   return (
-    <>
-      {currentPage === "home" && <MainPage />}
-
-      {currentPage === "login" && (
-        <Login
-          isVisible={true}
-          onClose={handleGoBack}
-          onSwitchToCreateAccount={handleOpenCreateAccount}
-          onSwitchToForgotPassword={handleOpenForgotPassword}
-        />
-      )}
-
-      {currentPage === "criar-conta" && (
-        <CreateAccount
-          isVisible={true}
-          onClose={handleGoBack}
-          onSwitchToLogin={handleOpenLogin}
-        />
-      )}
-
-      {currentPage === "esqueci-senha" && (
-        <ForgotPassword
-          isVisible={true}
-          onClose={handleGoBack}
-          onBackToLogin={handleOpenLogin}
-        />
-      )}
-    </>
+    <Routes>
+      <Route path="/" element={<MainPage />} />
+      <Route
+        path="/login"
+        element={
+          <Login
+            isVisible={true}
+            onClose={handleGoBack}
+            onSwitchToCreateAccount={handleOpenCreateAccount}
+            onSwitchToForgotPassword={handleOpenForgotPassword}
+          />
+        }
+      />
+      <Route
+        path="/criar-conta"
+        element={
+          <CreateAccount
+            isVisible={true}
+            onClose={handleGoBack}
+            onSwitchToLogin={handleOpenLogin}
+          />
+        }
+      />
+      <Route
+        path="/esqueci-senha"
+        element={
+          <ForgotPassword
+            isVisible={true}
+            onClose={handleGoBack}
+            onBackToLogin={handleOpenLogin}
+          />
+        }
+      />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 }
 
