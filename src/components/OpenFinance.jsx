@@ -37,7 +37,9 @@ export default function OpenFinance() {
           {/* Open Finance Image */}
           <div className="flex justify-center">
             <img
-              src="/imgs/openFinance.png"
+              src={
+                "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/openFinance.png"
+              }
               alt="Open Finance Connections"
               className="w-full max-w-xs sm:max-w-2xl lg:max-w-4xl h-auto"
             />

@@ -31,7 +31,9 @@ export default function Dashboard() {
               }`}
             >
               <img
-                src="/imgs/dashboard.png"
+                src={
+                  "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/dashboard.png"
+                }
                 alt="Dashboard Financeiro"
                 className="w-full rounded-xl sm:rounded-2xl shadow-2xl hover-lift smooth-transition"
                 style={{ height: "350px", objectFit: "contain" }}

@@ -15,7 +15,9 @@ export default function Header({ onOpenCreateAccount, onOpenLogin }) {
             className="flex items-center cursor-pointer hover:opacity-80 transition-opacity active:scale-95"
           >
             <img
-              src="/imgs/logoHeader.png"
+              src={
+                "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/logoHeader.png"
+              }
               alt="MEU BOLSO"
               className="h-8 sm:h-10 w-auto"
             />

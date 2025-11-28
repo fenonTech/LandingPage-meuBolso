@@ -6,7 +6,9 @@ export default function Footer() {
           {/* Logo and Description */}
           <div className="sm:col-span-2 md:col-span-2">
             <img
-              src="/imgs/logoHeader.png"
+              src={
+                "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/logoHeader.png"
+              }
               alt="Meu Bolso"
               className="h-8 w-auto mb-4"
             />
@@ -67,7 +69,9 @@ export default function Footer() {
                   className="text-gray-400 hover:text-white transition-colors text-sm active:text-yellow-400 flex items-center gap-2"
                 >
                   <img
-                    src="/imgs/whatsapp.png"
+                    src={
+                      "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/whatsapp.png"
+                    }
                     alt="WhatsApp"
                     className="w-5 h-5"
                   />
@@ -89,7 +93,9 @@ export default function Footer() {
                   className="text-gray-400 hover:text-white transition-colors text-sm active:text-yellow-400 flex items-center gap-2"
                 >
                   <img
-                    src="/imgs/instagram.png"
+                    src={
+                      "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/instagram.png"
+                    }
                     alt="Instagram"
                     className="w-5 h-5"
                   />

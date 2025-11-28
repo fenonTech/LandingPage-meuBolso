@@ -21,7 +21,9 @@ function ForgotPassword({ isVisible, onClose, onBackToLogin }) {
         className="absolute top-4 left-4 flex items-center z-10 hover:opacity-80 transition-opacity cursor-pointer"
       >
         <img
-          src="/imgs/logoHeader.png"
+          src={
+            "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/logoHeader.png"
+          }
           alt="MEU BOLSO"
           className="h-7 sm:h-10 w-auto"
         />
@@ -167,7 +169,9 @@ function ForgotPassword({ isVisible, onClose, onBackToLogin }) {
         {/* Phone with WhatsApp */}
         <div className="relative z-10 transform rotate-12 animate-float">
           <img
-            src="/imgs/celular.png"
+            src={
+              "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/celular.png"
+            }
             alt="WhatsApp Meu Bolso"
             className="w-96 h-auto drop-shadow-2xl"
           />

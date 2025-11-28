@@ -146,7 +146,9 @@ export default function FAQ() {
                 className="gradient-button text-white px-8 sm:px-10 py-4 rounded-full font-bold text-base sm:text-lg smooth-transition hover-lift inline-flex items-center animate-pulse-slow active:scale-95 shadow-2xl w-full sm:w-auto justify-center"
               >
                 <img
-                  src="/imgs/relogio.png"
+                  src={
+                    "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/relogio.png"
+                  }
                   alt="Relógio"
                   className="w-5 h-5 sm:w-6 sm:h-6 mr-2 animate-float flex-shrink-0"
                 />
@@ -164,7 +166,9 @@ export default function FAQ() {
             >
               <div className="flex items-center hover-lift smooth-transition active:scale-95">
                 <img
-                  src="/imgs/check.png"
+                  src={
+                    "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/check.png"
+                  }
                   alt="Check"
                   className="w-5 h-5 sm:w-6 sm:h-6 mr-3 flex-shrink-0"
                 />
@@ -174,7 +178,9 @@ export default function FAQ() {
               </div>
               <div className="flex items-center hover-lift smooth-transition active:scale-95">
                 <img
-                  src="/imgs/check.png"
+                  src={
+                    "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/check.png"
+                  }
                   alt="Check"
                   className="w-5 h-5 sm:w-6 sm:h-6 mr-3 flex-shrink-0"
                 />
@@ -184,7 +190,9 @@ export default function FAQ() {
               </div>
               <div className="flex items-center hover-lift smooth-transition active:scale-95">
                 <img
-                  src="/imgs/check.png"
+                  src={
+                    "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/check.png"
+                  }
                   alt="Check"
                   className="w-5 h-5 sm:w-6 sm:h-6 mr-3 flex-shrink-0"
                 />
@@ -194,7 +202,9 @@ export default function FAQ() {
               </div>
               <div className="flex items-center hover-lift smooth-transition active:scale-95">
                 <img
-                  src="/imgs/check.png"
+                  src={
+                    "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/check.png"
+                  }
                   alt="Check"
                   className="w-5 h-5 sm:w-6 sm:h-6 mr-3 flex-shrink-0"
                 />

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Dashboard from "./components/Dashboard";
@@ -13,7 +12,7 @@ import Login from "./components/Login";
 import ForgotPassword from "./components/ForgotPassword";
 
 function App() {
-  const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState("home");
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   // Detectar scroll para mostrar/ocultar botão
@@ -39,19 +38,23 @@ function App() {
   };
 
   const handleOpenCreateAccount = () => {
-    navigate("/criar-conta");
+    setCurrentPage("criar-conta");
+    scrollToTop();
   };
 
   const handleOpenLogin = () => {
-    navigate("/login");
+    setCurrentPage("login");
+    scrollToTop();
   };
 
   const handleOpenForgotPassword = () => {
-    navigate("/esqueci-senha");
+    setCurrentPage("esqueci-senha");
+    scrollToTop();
   };
 
   const handleGoBack = () => {
-    navigate("/");
+    setCurrentPage("home");
+    scrollToTop();
   };
 
   // Componente da página principal
@@ -96,40 +99,34 @@ function App() {
   );
 
   return (
-    <Routes>
-      <Route path="/" element={<MainPage />} />
-      <Route
-        path="/login"
-        element={
-          <Login
-            isVisible={true}
-            onClose={handleGoBack}
-            onSwitchToCreateAccount={handleOpenCreateAccount}
-            onSwitchToForgotPassword={handleOpenForgotPassword}
-          />
-        }
-      />
-      <Route
-        path="/criar-conta"
-        element={
-          <CreateAccount
-            isVisible={true}
-            onClose={handleGoBack}
-            onSwitchToLogin={handleOpenLogin}
-          />
-        }
-      />
-      <Route
-        path="/esqueci-senha"
-        element={
-          <ForgotPassword
-            isVisible={true}
-            onClose={handleGoBack}
-            onBackToLogin={handleOpenLogin}
-          />
-        }
-      />
-    </Routes>
+    <>
+      {currentPage === "home" && <MainPage />}
+
+      {currentPage === "login" && (
+        <Login
+          isVisible={true}
+          onClose={handleGoBack}
+          onSwitchToCreateAccount={handleOpenCreateAccount}
+          onSwitchToForgotPassword={handleOpenForgotPassword}
+        />
+      )}
+
+      {currentPage === "criar-conta" && (
+        <CreateAccount
+          isVisible={true}
+          onClose={handleGoBack}
+          onSwitchToLogin={handleOpenLogin}
+        />
+      )}
+
+      {currentPage === "esqueci-senha" && (
+        <ForgotPassword
+          isVisible={true}
+          onClose={handleGoBack}
+          onBackToLogin={handleOpenLogin}
+        />
+      )}
+    </>
   );
 }
 
