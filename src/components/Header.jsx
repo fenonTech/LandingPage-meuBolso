@@ -16,7 +16,7 @@ export default function Header({ onOpenCreateAccount, onOpenLogin }) {
           >
             <img
               src={
-                "/imgs/logoHeader.png"
+                "/landingpage/imgs/logoHeader.png"
               }
               alt="MEU BOLSO"
               className="h-8 sm:h-10 w-auto"

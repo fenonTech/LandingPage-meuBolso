@@ -167,7 +167,7 @@ function ForgotPassword({ isVisible, onClose, onBackToLogin }) {
         {/* Phone with WhatsApp */}
         <div className="relative z-10 transform rotate-12 animate-float">
           <img
-            src={"/imgs/celular.png"}
+            src={"/landingpage/imgs/celular.png"}
             alt="WhatsApp Meu Bolso"
             className="w-96 h-auto drop-shadow-2xl"
           />
