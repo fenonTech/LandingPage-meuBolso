@@ -16,7 +16,7 @@ export default function Header({ onOpenCreateAccount, onOpenLogin }) {
           >
             <img
               src={
-                "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/logoHeader.png"
+                "/imgs/logoHeader.png"
               }
               alt="MEU BOLSO"
               className="h-8 sm:h-10 w-auto"

@@ -171,7 +171,7 @@ function Login({
       >
         <img
           src={
-            "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/logoHeader.png"
+            "/imgs/logoHeader.png"
           }
           alt="MEU BOLSO"
           className="h-7 sm:h-10 w-auto"
@@ -376,7 +376,7 @@ function Login({
         <div className="relative z-10 transform rotate-12 animate-float">
           <img
             src={
-              "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/celular.png"
+              "/imgs/celular.png"
             }
             alt="WhatsApp Meu Bolso"
             className="w-96 h-auto drop-shadow-2xl"

@@ -7,7 +7,7 @@ export default function Footer() {
           <div className="sm:col-span-2 md:col-span-2">
             <img
               src={
-                "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/logoHeader.png"
+                "/imgs/logoHeader.png"
               }
               alt="Meu Bolso"
               className="h-8 w-auto mb-4"
@@ -70,7 +70,7 @@ export default function Footer() {
                 >
                   <img
                     src={
-                      "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/whatsapp.png"
+                      "/imgs/whatsapp.png"
                     }
                     alt="WhatsApp"
                     className="w-5 h-5"
@@ -94,7 +94,7 @@ export default function Footer() {
                 >
                   <img
                     src={
-                      "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/instagram.png"
+                      "/imgs/instagram.png"
                     }
                     alt="Instagram"
                     className="w-5 h-5"

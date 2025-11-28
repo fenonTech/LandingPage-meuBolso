@@ -7,7 +7,7 @@ export default function Hero({ onOpenCreateAccount }) {
         <div className="absolute -left-8 sm:-left-6 md:-left-8 top-[2%] sm:top-1/2 transform -translate-y-1/ -rotate-12 animate-fade-in-left animate-float">
           <img
             src={
-              "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/cartao.png"
+              "/imgs/cartao.png"
             }
             alt="Cartão Meu Bolso"
             className="w-28 h-auto sm:w-48 md:w-64 lg:w-84 shadow-2xl rounded-2xl hover-lift smooth-transition opacity-80 sm:opacity-100"
@@ -20,7 +20,7 @@ export default function Hero({ onOpenCreateAccount }) {
         <div className="relative">
           <img
             src={
-              "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/cofrepng.png"
+              "/imgs/cofrepng.png"
             }
             alt="Cofre"
             className="w-24 h-auto sm:w-48 md:w-64 md:h-70 lg:w-84 lg:h-84 hover-lift smooth-transition opacity-80 sm:opacity-100"
@@ -61,7 +61,7 @@ export default function Hero({ onOpenCreateAccount }) {
             >
               <img
                 src={
-                  "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/instagram.png"
+                  "/imgs/instagram.png"
                 }
                 alt="Instagram"
                 className="w-5 h-5 sm:w-6 sm:h-6 mr-2"
@@ -76,7 +76,7 @@ export default function Hero({ onOpenCreateAccount }) {
             >
               <img
                 src={
-                  "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/whatsapp.png"
+                  "/imgs/whatsapp.png"
                 }
                 alt="WhatsApp"
                 className="w-5 h-5 sm:w-6 sm:h-6 mr-2"
@@ -93,7 +93,7 @@ export default function Hero({ onOpenCreateAccount }) {
           >
             <img
               src={
-                "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/relogio.png"
+                "/imgs/relogio.png"
               }
               alt="Relógio"
               className="w-5 h-5 sm:w-6 sm:h-6 mr-2 animate-float flex-shrink-0"

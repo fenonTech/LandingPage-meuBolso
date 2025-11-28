@@ -147,7 +147,7 @@ export default function FAQ() {
               >
                 <img
                   src={
-                    "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/relogio.png"
+                    "/imgs/relogio.png"
                   }
                   alt="Relógio"
                   className="w-5 h-5 sm:w-6 sm:h-6 mr-2 animate-float flex-shrink-0"
@@ -167,7 +167,7 @@ export default function FAQ() {
               <div className="flex items-center hover-lift smooth-transition active:scale-95">
                 <img
                   src={
-                    "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/check.png"
+                    "/imgs/check.png"
                   }
                   alt="Check"
                   className="w-5 h-5 sm:w-6 sm:h-6 mr-3 flex-shrink-0"
@@ -179,7 +179,7 @@ export default function FAQ() {
               <div className="flex items-center hover-lift smooth-transition active:scale-95">
                 <img
                   src={
-                    "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/check.png"
+                    "/imgs/check.png"
                   }
                   alt="Check"
                   className="w-5 h-5 sm:w-6 sm:h-6 mr-3 flex-shrink-0"
@@ -191,7 +191,7 @@ export default function FAQ() {
               <div className="flex items-center hover-lift smooth-transition active:scale-95">
                 <img
                   src={
-                    "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/check.png"
+                    "/imgs/check.png"
                   }
                   alt="Check"
                   className="w-5 h-5 sm:w-6 sm:h-6 mr-3 flex-shrink-0"
@@ -203,7 +203,7 @@ export default function FAQ() {
               <div className="flex items-center hover-lift smooth-transition active:scale-95">
                 <img
                   src={
-                    "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/check.png"
+                    "/imgs/check.png"
                   }
                   alt="Check"
                   className="w-5 h-5 sm:w-6 sm:h-6 mr-3 flex-shrink-0"

@@ -62,7 +62,7 @@ export default function WhatsAppPay() {
             <div className="relative z-10 transform rotate-12 animate-float">
               <img
                 src={
-                  "https://fenon-meubolso.s3.us-east-1.amazonaws.com/landingpage/imgs/celular.png"
+                  "/imgs/celular.png"
                 }
                 alt="Celular com WhatsApp"
                 className="w-64 sm:w-80 lg:w-96 h-auto"
