@@ -2,24 +2,39 @@ import { useState } from "react";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState(2); // Last question open by default
+  const [openIndex, setOpenIndex] = useState(4); // Question about plan differences open by default
   const [sectionRef, isVisible] = useScrollAnimation(0.1);
 
   const faqs = [
     {
-      question: "Posso conectar mais de um banco?",
+      question: "Como funciona o registro de entrada e saída?",
       answer:
-        "Sim! Você pode conectar até 5 bancos simultaneamente ao Meu Bolso. Nossa plataforma suporta múltiplas conexões bancárias, permitindo que você visualize todas as suas contas em um único lugar, facilitando o controle total das suas finanças.",
+        "Você adiciona manualmente suas receitas e despesas através do nosso app ou WhatsApp. O sistema categoriza automaticamente seus gastos e gera relatórios para você acompanhar seu dinheiro de forma simples e organizada.",
     },
     {
-      question: "Como funciona a segurança dos meus dados?",
+      question: "O que é a análise avançada com IA?",
       answer:
-        "Utilizamos criptografia de ponta a ponta e seguimos todos os protocolos de segurança bancária. Seus dados são protegidos com a mesma tecnologia usada pelos maiores bancos do país. Nunca armazenamos suas senhas bancárias.",
+        "Nossa Inteligência Artificial analisa seus padrões de gastos e receitas, identifica tendências, sugere onde você pode economizar e alerta sobre gastos incomuns. Disponível nos planos Inteligente e Visionário.",
     },
     {
-      question: "O Meu Bolso consegue efetuar transações e pagamentos?",
+      question: "Como funciona a consultoria com agente IA?",
       answer:
-        "Não. O Meu Bolso é uma ferramenta de gestão e análise financeira. Nós apenas consultamos e organizamos suas informações bancárias. Não realizamos transferências, pagamentos ou qualquer tipo de transação. Sua segurança é nossa prioridade.",
+        "No plano Visionário, você tem acesso a um consultor virtual que responde suas dúvidas financeiras, ajuda com planejamento de orçamento e oferece conselhos personalizados baseados no seu perfil financeiro.",
+    },
+    {
+      question: "Posso usar pelo WhatsApp?",
+      answer:
+        "Sim! Você pode registrar seus gastos e receitas diretamente pelo WhatsApp de forma rápida e prática. É uma das formas mais simples de manter seu controle financeiro sempre atualizado.",
+    },
+    {
+      question: "Qual a diferença entre os planos?",
+      answer:
+        "Essencial: controle básico. Inteligente: + IA, planejamento e alertas. Visionário: + consultoria especializada e suporte prioritário. Cada plano inclui todas as funcionalidades do anterior.",
+    },
+    {
+      question: "Meus dados ficam seguros?",
+      answer:
+        "Sim! Utilizamos criptografia avançada e não temos acesso às suas contas bancárias. Você apenas registra as informações que deseja acompanhar, mantendo total controle sobre seus dados.",
     },
   ];
 
@@ -118,21 +133,21 @@ export default function FAQ() {
 
         {/* Bottom CTA Section */}
         <div className="bg-gradient-to-br from-gray-900/50 to-gray-900/30 border border-gray-800 rounded-2xl p-8 sm:p-10 lg:p-12">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-12 items-center">
-            {/* Left Content */}
+          <div className="flex justify-center items-center">
+            {/* Center Content */}
             <div
-              className={`lg:col-span-3 text-center lg:text-left transition-all duration-1000 delay-600 ${
+              className={`text-center transition-all duration-1000 delay-600 ${
                 isVisible
-                  ? "animate-fade-in-left"
-                  : "opacity-0 transform translate-x-[-30px]"
+                  ? "animate-fade-in-up"
+                  : "opacity-0 transform translate-y-8"
               }`}
             >
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 lg:mb-8 leading-tight">
                 Pronto para organizar suas finanças?
               </h2>
 
-              <a
-                href="#plans"
+              <button
+                onClick={() => window.location.hash = '/planos'}
                 className="gradient-button text-white px-8 sm:px-10 py-4 rounded-full font-bold text-base sm:text-lg smooth-transition hover-lift inline-flex items-center animate-pulse-slow active:scale-95 shadow-2xl w-full sm:w-auto justify-center"
               >
                 <img
@@ -141,47 +156,7 @@ export default function FAQ() {
                   className="w-5 h-5 sm:w-6 sm:h-6 mr-2 animate-float flex-shrink-0"
                 />
                 <span>Escolha seu plano</span>
-              </a>
-            </div>
-
-            {/* Right Content - Features List */}
-            <div
-              className={`lg:col-span-2 space-y-4 transition-all duration-1000 delay-700 ${
-                isVisible
-                  ? "animate-fade-in-right"
-                  : "opacity-0 transform translate-x-[30px]"
-              }`}
-            >
-              <div className="flex items-center hover-lift smooth-transition active:scale-95">
-                <img
-                  src={"/landingpage/imgs/check.png"}
-                  alt="Check"
-                  className="w-5 h-5 sm:w-6 sm:h-6 mr-3 flex-shrink-0"
-                />
-                <span className="text-gray-300 font-medium text-sm sm:text-base">
-                  Análise avançada com IA
-                </span>
-              </div>
-              <div className="flex items-center hover-lift smooth-transition active:scale-95">
-                <img
-                  src={"/landingpage/imgs/check.png"}
-                  alt="Check"
-                  className="w-5 h-5 sm:w-6 sm:h-6 mr-3 flex-shrink-0"
-                />
-                <span className="text-gray-300 font-medium text-sm sm:text-base">
-                  Registro de entrada e saída
-                </span>
-              </div>
-              <div className="flex items-center hover-lift smooth-transition active:scale-95">
-                <img
-                  src={"/landingpage/imgs/check.png"}
-                  alt="Check"
-                  className="w-5 h-5 sm:w-6 sm:h-6 mr-3 flex-shrink-0"
-                />
-                <span className="text-gray-300 font-medium text-sm sm:text-base">
-                  Dashboard completo
-                </span>
-              </div>
+              </button>
             </div>
           </div>
         </div>
