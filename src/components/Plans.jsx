@@ -21,14 +21,32 @@ export default function Plans({ isRenewal = false }) {
       plan3: { price: "39,90", savings: null },
     },
     trimestral: {
-      plan1: { price: "8,90", savings: "10%" },
-      plan2: { price: "18,89", savings: "10%" },
-      plan3: { price: "36,81", savings: "8%" },
+      plan1: { price: "26,70", savings: "10%" },
+      plan2: { price: "56,67", savings: "10%" },
+      plan3: { price: "110,43", savings: "8%" },
     },
     anual: {
-      plan1: { price: "6,50", savings: "34%" },
-      plan2: { price: "14,90", savings: "29%" },
-      plan3: { price: "25,90", savings: "35%" },
+      plan1: { price: "78,00", savings: "34%" },
+      plan2: { price: "178,80", savings: "29%" },
+      plan3: { price: "310,80", savings: "35%" },
+    },
+  };
+
+  const checkoutLinks = {
+    plan1: {
+      mensal: "https://pay.cakto.com.br/33iwqtq_681602",
+      trimestral: "https://pay.cakto.com.br/ztr9vwi_681604",
+      anual: "https://pay.cakto.com.br/xrc5op3_681609",
+    },
+    plan2: {
+      mensal: "https://pay.cakto.com.br/5t4fd3a_700615",
+      trimestral: "https://pay.cakto.com.br/xqfhjuf_700616",
+      anual: "https://pay.cakto.com.br/i2zif6g_700617",
+    },
+    plan3: {
+      mensal: "https://pay.cakto.com.br/qppxuf3_700618",
+      trimestral: "https://pay.cakto.com.br/kfyd2u4_700619",
+      anual: "https://pay.cakto.com.br/s3ichri_700620",
     },
   };
 
@@ -185,7 +203,7 @@ export default function Plans({ isRenewal = false }) {
                 <span className="text-white text-4xl font-bold">
                   R$ {pricing[selectedPeriod].plan1.price}
                 </span>
-                <span className="text-gray-400 text-sm">/mês</span>
+                <span className="text-gray-400 text-sm">/{selectedPeriod === 'mensal' ? 'mensal' : selectedPeriod === 'trimestral' ? 'trimestral' : 'anual'}</span>
               </div>
               {pricing[selectedPeriod].plan1.savings && (
                 <div className="mb-4 relative z-10 text-left">
@@ -248,9 +266,13 @@ export default function Plans({ isRenewal = false }) {
 
               <button
                 className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-3 px-6 rounded-lg transition-all duration-300 active:scale-95 shadow-lg relative z-10"
-                onClick={() =>
-                  isRenewal ? (window.location.hash = "/planos") : null
-                }
+                onClick={() => {
+                  if (isRenewal) {
+                    window.location.hash = "/planos";
+                  } else {
+                    window.open(checkoutLinks.plan1[selectedPeriod], "_blank");
+                  }
+                }}
               >
                 {isRenewal ? "Renovar Essencial" : "Assinar Essencial"}
               </button>
@@ -295,7 +317,7 @@ export default function Plans({ isRenewal = false }) {
                 <span className="text-white text-4xl font-bold">
                   R$ {pricing[selectedPeriod].plan2.price}
                 </span>
-                <span className="text-gray-400 text-sm">/mês</span>
+                <span className="text-gray-400 text-sm">/{selectedPeriod === 'mensal' ? 'mensal' : selectedPeriod === 'trimestral' ? 'trimestral' : 'anual'}</span>
               </div>
               {pricing[selectedPeriod].plan2.savings && (
                 <div className="mb-4 relative z-10 text-left">
@@ -352,9 +374,13 @@ export default function Plans({ isRenewal = false }) {
 
               <button
                 className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-3 px-6 rounded-lg transition-all duration-300 active:scale-95 shadow-lg relative z-10"
-                onClick={() =>
-                  isRenewal ? (window.location.hash = "/planos") : null
-                }
+                onClick={() => {
+                  if (isRenewal) {
+                    window.location.hash = "/planos";
+                  } else {
+                    window.open(checkoutLinks.plan2[selectedPeriod], "_blank");
+                  }
+                }}
               >
                 {isRenewal ? "Renovar Inteligente" : "Assinar Inteligente"}
               </button>
@@ -394,7 +420,7 @@ export default function Plans({ isRenewal = false }) {
                 <span className="text-white text-4xl font-bold">
                   R$ {pricing[selectedPeriod].plan3.price}
                 </span>
-                <span className="text-gray-400 text-sm">/mês</span>
+                <span className="text-gray-400 text-sm">/{selectedPeriod === 'mensal' ? 'mensal' : selectedPeriod === 'trimestral' ? 'trimestral' : 'anual'}</span>
               </div>
               {pricing[selectedPeriod].plan3.savings && (
                 <div className="mb-4 relative z-10 text-left">
@@ -438,9 +464,16 @@ export default function Plans({ isRenewal = false }) {
               </ul>
               <button
                 className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-3 px-6 rounded-lg transition-all duration-300 active:scale-95 shadow-lg relative z-10"
-                onClick={() =>
-                  isRenewal ? (window.location.hash = "/planos") : null
-                }
+                onClick={() => {
+                  if (isRenewal) {
+                    window.location.hash = "/planos";
+                  } else {
+                    const checkoutUrl = checkoutLinks.plan3[selectedPeriod];
+                    if (checkoutUrl) {
+                      window.open(checkoutUrl, '_blank');
+                    }
+                  }
+                }}
               >
                 {isRenewal ? "Renovar Visionário" : "Assinar Visionário"}
               </button>
