@@ -252,16 +252,16 @@ function Login({
                   )}
                 </button>
 
-                {/* Link para criar conta */}
+                {/* Link para adquirir plano */}
                 <div className="text-center pt-2">
                   <p className="text-gray-400 text-xs">
-                    Não tem uma conta?{" "}
+                    Ainda não tem acesso?{" "}
                     <button
                       type="button"
-                      className="text-gray-400 hover:text-gray-300 transition-colors font-medium underline decoration-gray-400"
-                      onClick={onSwitchToCreateAccount}
+                      className="text-yellow-400 hover:text-yellow-300 transition-colors font-medium underline decoration-yellow-400"
+                      onClick={() => window.location.hash = "/planos"}
                     >
-                      Criar conta gratuita
+                      Assine um plano aqui
                     </button>
                   </p>
                 </div>
@@ -372,12 +372,12 @@ function Login({
       </div>
 
       {/* Lado direito - Imagem do WhatsApp */}
-      <div className="hidden lg:flex w-1/2 items-center justify-center bg-black relative overflow-hidden">
+      <div className="hidden lg:flex w-1/2 flex-col items-center justify-center bg-black relative overflow-hidden py-12">
         {/* Yellow background circle */}
         <div className="absolute w-[500px] h-[500px] bg-yellow-400 rounded-full opacity-20 blur-3xl"></div>
 
         {/* Phone with WhatsApp */}
-        <div className="relative z-10 transform rotate-12 animate-float">
+        <div className="relative z-10 transform rotate-12 animate-float mb-8">
           <img
             src={"/landingpage/imgs/celular.png"}
             alt="WhatsApp Meu Bolso"
@@ -386,7 +386,7 @@ function Login({
         </div>
 
         {/* Decorative text */}
-        <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 text-center">
+        <div className="relative z-10 text-center">
           <p className="text-gray-400 text-lg font-medium">
             Gerencie suas finanças pelo WhatsApp
           </p>
