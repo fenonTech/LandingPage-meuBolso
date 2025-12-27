@@ -6,15 +6,13 @@ export default function Footer() {
           {/* Logo and Description */}
           <div className="sm:col-span-2 md:col-span-2">
             <img
-              src={
-                "/landingpage/imgs/logoHeader.png"
-              }
+              src={"/landingpage/imgs/logoHeader.png"}
               alt="Meu Bolso"
               className="h-8 w-auto mb-4"
             />
             <p className="text-gray-400 text-sm sm:text-base mb-6 max-w-md leading-relaxed">
               Controle seu dinheiro de forma simples e inteligente. Comece agora
-              e aproveite 5 dias grátis para usar o Meu Bolso sem compromisso.
+              e transforme sua relação com as finanças.
             </p>
           </div>
 
@@ -65,13 +63,13 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <a
-                  href="#"
+                  href="https://wa.me/5511918682080?text=Quanto%20gastei%20hoje?"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition-colors text-sm active:text-yellow-400 flex items-center gap-2"
                 >
                   <img
-                    src={
-                      "/landingpage/imgs/whatsapp.png"
-                    }
+                    src={"/landingpage/imgs/whatsapp.png"}
                     alt="WhatsApp"
                     className="w-5 h-5"
                   />
@@ -89,13 +87,13 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <a
-                  href="#"
+                  href="https://www.instagram.com/meubolsoia/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition-colors text-sm active:text-yellow-400 flex items-center gap-2"
                 >
                   <img
-                    src={
-                      "/landingpage/imgs/instagram.png"
-                    }
+                    src={"/landingpage/imgs/instagram.png"}
                     alt="Instagram"
                     className="w-5 h-5"
                   />

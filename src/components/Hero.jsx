@@ -52,7 +52,9 @@ export default function Hero({ onOpenCreateAccount }) {
             style={{ animationDelay: "0.6s" }}
           >
             <a
-              href="#"
+              href="https://www.instagram.com/meubolsoia/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center text-pink-500 hover:text-pink-400 smooth-transition hover-lift active:scale-95"
             >
               <img
@@ -65,7 +67,9 @@ export default function Hero({ onOpenCreateAccount }) {
               </span>
             </a>
             <a
-              href="#"
+              href="https://wa.me/5511918682080?text=Quanto%20gastei%20hoje?"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center text-green-500 hover:text-green-400 smooth-transition hover-lift active:scale-95"
             >
               <img
