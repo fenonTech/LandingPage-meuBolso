@@ -259,7 +259,7 @@ function Login({
                     <button
                       type="button"
                       className="text-yellow-400 hover:text-yellow-300 transition-colors font-medium underline decoration-yellow-400"
-                      onClick={() => window.location.hash = "/planos"}
+                      onClick={() => (window.location.hash = "/planos")}
                     >
                       Assine um plano aqui
                     </button>
