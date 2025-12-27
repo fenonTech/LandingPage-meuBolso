@@ -177,11 +177,7 @@ export default function Plans({ isRenewal = false }) {
                   }}
                 />
               )}
-              <div className="absolute top-0 right-0 z-20">
-                <span className="bg-green-500 text-white px-3 py-1 rounded-bl-lg text-xs font-bold shadow-lg">
-                  5 DIAS GRÁTIS
-                </span>
-              </div>
+
               <h3 className="text-white text-xl font-bold mb-2 relative z-10 text-left">
                 Plano Essencial
               </h3>
@@ -202,16 +198,10 @@ export default function Plans({ isRenewal = false }) {
                 <div className="mb-4"></div>
               )}
               <p className="text-gray-400 text-sm mb-6 leading-relaxed relative z-10 text-left">
-                Para quem quer apenas acompanhar gastos básicos
+                Para quem quer organizar gastos de forma simples
               </p>
 
               <ul className="space-y-3 text-sm mb-6 relative z-10 flex-grow">
-                <li className="flex items-center text-gray-300">
-                  <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
-                    <span className="text-white text-xs font-bold">✓</span>
-                  </div>
-                  Análise avançada com IA
-                </li>
                 <li className="flex items-center text-gray-300">
                   <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
                     <span className="text-white text-xs font-bold">✓</span>
@@ -222,19 +212,37 @@ export default function Plans({ isRenewal = false }) {
                   <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
                     <span className="text-white text-xs font-bold">✓</span>
                   </div>
-                  Dashboard completo
+                  Dashboard básico
                 </li>
                 <li className="flex items-center text-gray-300">
                   <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
                     <span className="text-white text-xs font-bold">✓</span>
                   </div>
-                  Open Finance
+                  Relatórios mensais
                 </li>
                 <li className="flex items-center text-gray-500">
                   <div className="w-5 h-5 bg-gray-700 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
                     <span className="text-gray-500 text-xs font-bold">✗</span>
                   </div>
-                  Conta Compartilhada
+                  Análise avançada com IA
+                </li>
+                <li className="flex items-center text-gray-500">
+                  <div className="w-5 h-5 bg-gray-700 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                    <span className="text-gray-500 text-xs font-bold">✗</span>
+                  </div>
+                  Planejamento de gastos
+                </li>
+                <li className="flex items-center text-gray-500">
+                  <div className="w-5 h-5 bg-gray-700 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                    <span className="text-gray-500 text-xs font-bold">✗</span>
+                  </div>
+                  Alertas personalizados
+                </li>
+                <li className="flex items-center text-gray-500">
+                  <div className="w-5 h-5 bg-gray-700 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                    <span className="text-gray-500 text-xs font-bold">✗</span>
+                  </div>
+                  Consultoria com agente IA
                 </li>
               </ul>
 
@@ -300,7 +308,7 @@ export default function Plans({ isRenewal = false }) {
                 <div className="mb-4"></div>
               )}
               <p className="text-gray-400 text-sm mb-6 leading-relaxed relative z-10 text-left">
-                Para apostas, alertas e comparativos semanais mensais
+                Para quem quer planejamento e controle avançado
               </p>
 
               <ul className="space-y-3 text-sm mb-6 relative z-10 flex-grow">
@@ -314,7 +322,7 @@ export default function Plans({ isRenewal = false }) {
                   <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
                     <span className="text-white text-xs font-bold">✓</span>
                   </div>
-                  Open Finance
+                  Análise avançada com IA
                 </li>
                 <li className="flex items-center text-gray-300">
                   <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
@@ -326,19 +334,19 @@ export default function Plans({ isRenewal = false }) {
                   <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
                     <span className="text-white text-xs font-bold">✓</span>
                   </div>
-                  Alertas baseados em gastos
-                </li>
-                <li className="flex items-center text-gray-300">
-                  <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
-                    <span className="text-white text-xs font-bold">✓</span>
-                  </div>
-                  Conta Compartilhada
+                  Alertas personalizados
                 </li>
                 <li className="flex items-center text-gray-500">
                   <div className="w-5 h-5 bg-gray-700 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
                     <span className="text-gray-500 text-xs font-bold">✗</span>
                   </div>
-                  Consultoria com Agente IA
+                  Consultoria com agente IA
+                </li>
+                <li className="flex items-center text-gray-500">
+                  <div className="w-5 h-5 bg-gray-700 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                    <span className="text-gray-500 text-xs font-bold">✗</span>
+                  </div>
+                  Suporte prioritário
                 </li>
               </ul>
 
@@ -399,7 +407,7 @@ export default function Plans({ isRenewal = false }) {
                 <div className="mb-4"></div>
               )}
               <p className="text-gray-400 text-sm mb-6 leading-relaxed relative z-10 text-left">
-                Foco em planejamento de longo prazo, metas e investimentos
+                Para quem quer máximo controle e consultoria especializada
               </p>
 
               <ul className="space-y-3 text-sm mb-6 relative z-10 flex-grow">
@@ -419,19 +427,13 @@ export default function Plans({ isRenewal = false }) {
                   <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
                     <span className="text-white text-xs font-bold">✓</span>
                   </div>
-                  Open Finance
+                  Suporte prioritário
                 </li>
                 <li className="flex items-center text-gray-300">
                   <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
                     <span className="text-white text-xs font-bold">✓</span>
                   </div>
-                  Lembretes de vencimento
-                </li>
-                <li className="flex items-center text-gray-300">
-                  <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
-                    <span className="text-white text-xs font-bold">✓</span>
-                  </div>
-                  Budget mensal
+                  Acesso total às funcionalidades
                 </li>
               </ul>
               <button

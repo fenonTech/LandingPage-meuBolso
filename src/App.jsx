@@ -4,7 +4,6 @@ import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Dashboard from "./components/Dashboard";
 import WhatsAppPay from "./components/WhatsAppPay";
-import OpenFinance from "./components/OpenFinance";
 import Plans from "./components/Plans";
 import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
@@ -171,7 +170,7 @@ function App() {
                 </div>
               </div>
             </div>
-            <Plans isRenewal={true} />
+            <Plans isRenewal={false} />
           </div>
         }
       />

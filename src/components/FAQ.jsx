@@ -2,34 +2,24 @@ import { useState } from "react";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState(4); // Last question open by default
+  const [openIndex, setOpenIndex] = useState(2); // Last question open by default
   const [sectionRef, isVisible] = useScrollAnimation(0.1);
 
   const faqs = [
-    {
-      question: "O que é o Open Finance?",
-      answer:
-        "Open Finance é um sistema seguro autorizado pelo Banco Central que permite compartilhar seus dados financeiros entre diferentes instituições de forma protegida. Com ele, o Meu Bolso consegue acessar suas informações bancárias diretamente, sem necessidade de enviar extratos manualmente.",
-    },
     {
       question: "Posso conectar mais de um banco?",
       answer:
         "Sim! Você pode conectar até 5 bancos simultaneamente ao Meu Bolso. Nossa plataforma suporta múltiplas conexões bancárias, permitindo que você visualize todas as suas contas em um único lugar, facilitando o controle total das suas finanças.",
     },
     {
-      question: "Preciso fornecer minhas senhas bancárias ao Meu Bolso?",
+      question: "Como funciona a segurança dos meus dados?",
       answer:
-        "Não! Você nunca precisa fornecer suas senhas bancárias. Nos conectamos diretamente através do Open Finance, que é um sistema seguro e autorizado pelo Banco Central. A autenticação é feita diretamente no aplicativo do seu banco, garantindo total segurança.",
+        "Utilizamos criptografia de ponta a ponta e seguimos todos os protocolos de segurança bancária. Seus dados são protegidos com a mesma tecnologia usada pelos maiores bancos do país. Nunca armazenamos suas senhas bancárias.",
     },
     {
       question: "O Meu Bolso consegue efetuar transações e pagamentos?",
       answer:
-        "Não. O Meu Bolso é uma ferramenta de gestão e análise financeira. Nós apenas consultamos e organizamos suas informações bancárias através do Open Finance. Não realizamos transferências, pagamentos ou qualquer tipo de transação. Sua segurança é nossa prioridade.",
-    },
-    {
-      question: "Preciso configurar ou instalar algo no app do meu banco?",
-      answer:
-        "Não. O Meu Bolso usa o Open Finance, uma tecnologia autorizada pelo Banco Central, que permite integração segura sem necessidade de instalar nada nos apps dos bancos. Você só precisa autorizar o acesso aos seus dados financeiros uma vez, e o Meu Bolso fará o resto automaticamente.",
+        "Não. O Meu Bolso é uma ferramenta de gestão e análise financeira. Nós apenas consultamos e organizamos suas informações bancárias. Não realizamos transferências, pagamentos ou qualquer tipo de transação. Sua segurança é nossa prioridade.",
     },
   ];
 
@@ -146,9 +136,7 @@ export default function FAQ() {
                 className="gradient-button text-white px-8 sm:px-10 py-4 rounded-full font-bold text-base sm:text-lg smooth-transition hover-lift inline-flex items-center animate-pulse-slow active:scale-95 shadow-2xl w-full sm:w-auto justify-center"
               >
                 <img
-                  src={
-                    "/landingpage/imgs/relogio.png"
-                  }
+                  src={"/landingpage/imgs/relogio.png"}
                   alt="Relógio"
                   className="w-5 h-5 sm:w-6 sm:h-6 mr-2 animate-float flex-shrink-0"
                 />
@@ -166,9 +154,7 @@ export default function FAQ() {
             >
               <div className="flex items-center hover-lift smooth-transition active:scale-95">
                 <img
-                  src={
-                    "/landingpage/imgs/check.png"
-                  }
+                  src={"/landingpage/imgs/check.png"}
                   alt="Check"
                   className="w-5 h-5 sm:w-6 sm:h-6 mr-3 flex-shrink-0"
                 />
@@ -178,9 +164,7 @@ export default function FAQ() {
               </div>
               <div className="flex items-center hover-lift smooth-transition active:scale-95">
                 <img
-                  src={
-                    "/landingpage/imgs/check.png"
-                  }
+                  src={"/landingpage/imgs/check.png"}
                   alt="Check"
                   className="w-5 h-5 sm:w-6 sm:h-6 mr-3 flex-shrink-0"
                 />
@@ -190,26 +174,12 @@ export default function FAQ() {
               </div>
               <div className="flex items-center hover-lift smooth-transition active:scale-95">
                 <img
-                  src={
-                    "/landingpage/imgs/check.png"
-                  }
+                  src={"/landingpage/imgs/check.png"}
                   alt="Check"
                   className="w-5 h-5 sm:w-6 sm:h-6 mr-3 flex-shrink-0"
                 />
                 <span className="text-gray-300 font-medium text-sm sm:text-base">
                   Dashboard completo
-                </span>
-              </div>
-              <div className="flex items-center hover-lift smooth-transition active:scale-95">
-                <img
-                  src={
-                    "/landingpage/imgs/check.png"
-                  }
-                  alt="Check"
-                  className="w-5 h-5 sm:w-6 sm:h-6 mr-3 flex-shrink-0"
-                />
-                <span className="text-gray-300 font-medium text-sm sm:text-base">
-                  Open Finance
                 </span>
               </div>
             </div>
