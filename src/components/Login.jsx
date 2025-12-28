@@ -42,6 +42,7 @@ function Login({
           body: JSON.stringify({
             tipoMetodo: "gerarCodigo",
             telefone: phoneNumber,
+            notificacao: true,
           }),
         }
       );
@@ -117,6 +118,7 @@ function Login({
             tipoMetodo: "validarCodigo",
             telefone: phoneNumber,
             codigoTemp: fullCode,
+            notificacao: true,
           }),
         }
       );
@@ -131,7 +133,8 @@ function Login({
         const redirectUrl = `https://www.fenontech.com.br/dashboard/index.html?telefone=${encodeURIComponent(
           phoneNumber
         )}&codigo=${encodeURIComponent(fullCode)}`;
-        // const redirectUrl = `http://localhost:5174/?telefone=${encodeURIComponent(
+
+        // const redirectUrl = `http://localhost:5175/?telefone=${encodeURIComponent(
         //   phoneNumber
         // )}&codigo=${encodeURIComponent(fullCode)}`;
 
