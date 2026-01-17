@@ -208,8 +208,8 @@ export default function Plans({ isRenewal = false }) {
                   {selectedPeriod === "mensal"
                     ? "mensal"
                     : selectedPeriod === "trimestral"
-                    ? "trimestral"
-                    : "anual"}
+                      ? "trimestral"
+                      : "anual"}
                 </span>
               </div>
               {pricing[selectedPeriod].plan1.savings && (
@@ -329,8 +329,8 @@ export default function Plans({ isRenewal = false }) {
                   {selectedPeriod === "mensal"
                     ? "mensal"
                     : selectedPeriod === "trimestral"
-                    ? "trimestral"
-                    : "anual"}
+                      ? "trimestral"
+                      : "anual"}
                 </span>
               </div>
               {pricing[selectedPeriod].plan2.savings && (
@@ -439,8 +439,8 @@ export default function Plans({ isRenewal = false }) {
                   {selectedPeriod === "mensal"
                     ? "mensal"
                     : selectedPeriod === "trimestral"
-                    ? "trimestral"
-                    : "anual"}
+                      ? "trimestral"
+                      : "anual"}
                 </span>
               </div>
               {pricing[selectedPeriod].plan3.savings && (
