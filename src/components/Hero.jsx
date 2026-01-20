@@ -30,15 +30,18 @@ export default function Hero({ onOpenCreateAccount }) {
     const phoneNumber = "+55" + telefone.replace(/\D/g, "");
 
     try {
-      const response = await fetch("https://backend-pearl-rho-82.vercel.app/api/auth/cadastrar", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        "https://backend-pearl-rho-82.vercel.app/api/auth/cadastrar",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            telefone: phoneNumber,
+          }),
         },
-        body: JSON.stringify({
-          telefone: phoneNumber,
-        }),
-      });
+      );
 
       if (response.ok) {
         console.log("Cadastro realizado com sucesso!");
