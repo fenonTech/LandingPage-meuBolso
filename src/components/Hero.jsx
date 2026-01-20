@@ -1,6 +1,95 @@
+import { useState } from "react";
+
 export default function Hero({ onOpenCreateAccount }) {
+  const [telefone, setTelefone] = useState("");
+  const [showError, setShowError] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+  const handlePhoneChange = (e) => {
+    let value = e.target.value.replace(/\D/g, ""); // Remove tudo que não é número
+
+    if (value.length >= 2) {
+      value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+    }
+    if (value.length >= 10) {
+      value = `${value.slice(0, 10)}-${value.slice(10, 14)}`;
+    }
+
+    setTelefone(value);
+    if (showError && value) {
+      setShowError(false);
+    }
+  };
+
+  const handleTrialClick = async () => {
+    if (telefone.length < 15) {
+      setShowError(true);
+      return;
+    }
+    
+    const phoneNumber = "+55" + telefone.replace(/\D/g, "");
+    
+    try {
+      const response = await fetch("/api/auth/cadastrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          telefone: phoneNumber,
+        }),
+      });
+
+      if (response.ok) {
+        console.log("Cadastro realizado com sucesso!");
+        setShowSuccessModal(true);
+      } else {
+        console.error("Erro ao cadastrar:", await response.text());
+        setShowError(true);
+      }
+    } catch (error) {
+      console.error("Erro na requisição:", error);
+      setShowError(true);
+    }
+  };
+
   return (
-    <section className="bg-black min-h-screen relative overflow-hidden">
+    <>
+      {/* Modal de Sucesso */}
+      {showSuccessModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 px-4">
+          <div className="bg-gray-900 rounded-2xl p-8 max-w-md w-full text-center animate-fade-in-up shadow-2xl border border-gray-800">
+            <div className="mb-6">
+              <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-white text-3xl font-bold">✓</span>
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-3">
+                Tudo certo com o seu cadastro!
+              </h3>
+              <p className="text-gray-300 mb-6">
+                Continue pelo WhatsApp
+              </p>
+            </div>
+            <button
+              onClick={() => {
+                setShowSuccessModal(false);
+                window.open("https://wa.me/5511918682080?text=Olá,%20acabei%20de%20me%20cadastrar!", "_blank");
+              }}
+              className="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-full font-bold text-base smooth-transition w-full mb-3"
+            >
+              Abrir WhatsApp
+            </button>
+            <button
+              onClick={() => setShowSuccessModal(false)}
+              className="text-gray-400 hover:text-white text-sm smooth-transition"
+            >
+              Fechar
+            </button>
+          </div>
+        </div>
+      )}
+
+      <section className="bg-black min-h-screen relative overflow-hidden">
       {/* Background elements */}
       <div className=" inset-0 pointer-events-none">
         {/* Floating card on the left - otimizado mobile */}
@@ -25,7 +114,7 @@ export default function Hero({ onOpenCreateAccount }) {
       </div>
 
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex flex-col items-center justify-start sm:justify-center min-h-screen text-center pt-32 pb-4 sm:py-20">
+        <div className="flex flex-col items-center justify-start sm:justify-center min-h-screen text-center pt-32 pb-4 sm:pt-0 sm:pb-20">
           {/* Main heading - otimizado mobile */}
           <h1
             className="text-[2rem] leading-tight sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-5 sm:mb-6 max-w-4xl animate-fade-in-up px-2"
@@ -81,17 +170,54 @@ export default function Hero({ onOpenCreateAccount }) {
             </a>
           </div>
 
+          {/* Trial Section - otimizado mobile */}
+          <div
+            className="w-full max-w-3xl mb-4 sm:mb-6 animate-fade-in-up px-4"
+            style={{ animationDelay: "0.7s" }}
+          >
+            <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6 text-center">
+              Resgate seu período de teste
+            </h3>
+            <div className="flex flex-col gap-3 items-center">
+              <div className="w-full sm:w-auto flex flex-col gap-3">
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <input
+                    type="tel"
+                    value={telefone}
+                    onChange={handlePhoneChange}
+                    placeholder="(00) 00000-0000"
+                    maxLength="15"
+                    className={`w-full sm:w-[300px] bg-gray-900 border ${
+                      showError ? "border-red-500" : "border-gray-800"
+                    } rounded-full px-4 py-2 text-sm text-gray-300 placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors autofill:bg-gray-900`}
+                  />
+                  <button
+                    onClick={handleTrialClick}
+                    className="gradient-button text-white px-6 py-2.5 rounded-full font-bold text-sm sm:text-base smooth-transition hover-lift active:scale-95 shadow-2xl whitespace-nowrap"
+                  >
+                    Resgatar
+                  </button>
+                </div>
+                {showError && (
+                  <p className="text-red-500 text-sm text-center animate-fade-in-up">
+                    Por favor, insira um número de telefone válido
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+
           {/* CTA Buttons - otimizado mobile */}
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto justify-center items-center">
             <button
               onClick={() => (window.location.hash = "/planos")}
-              className="gradient-button text-white px-8 sm:px-10 py-4 rounded-full font-bold text-base sm:text-lg smooth-transition hover-lift inline-flex items-center animate-pulse-slow active:scale-95 shadow-2xl justify-center"
+              className="bg-yellow-400 hover:bg-yellow-300 text-black px-8 sm:px-10 py-4 rounded-full font-bold text-base sm:text-lg smooth-transition hover-lift inline-flex items-center active:scale-95 shadow-lg hover:shadow-xl justify-center"
               style={{ animationDelay: "0.8s" }}
             >
               <img
                 src={"/landingpage/imgs/relogio.png"}
                 alt="Relógio"
-                className="w-5 h-5 sm:w-6 sm:h-6 mr-2 animate-float flex-shrink-0"
+                className="w-5 h-5 sm:w-6 sm:h-6 mr-2 flex-shrink-0 brightness-0"
               />
               <span>Escolha seu plano</span>
             </button>
@@ -99,5 +225,6 @@ export default function Hero({ onOpenCreateAccount }) {
         </div>
       </div>
     </section>
+    </>
   );
 }
