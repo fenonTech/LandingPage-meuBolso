@@ -30,7 +30,7 @@ export default function Hero({ onOpenCreateAccount }) {
     const phoneNumber = "+55" + telefone.replace(/\D/g, "");
 
     try {
-      const response = await fetch("/api/auth/cadastrar", {
+      const response = await fetch("https://backend-pearl-rho-82.vercel.app/api/auth/cadastrar", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -58,10 +58,10 @@ export default function Hero({ onOpenCreateAccount }) {
       {/* Modal de Sucesso */}
       {showSuccessModal && (
         <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 px-4">
-          <div className="bg-gray-900 rounded-2xl p-8 max-w-md w-full text-center animate-fade-in-up shadow-2xl border border-gray-800">
+          <div className="bg-black rounded-2xl p-8 max-w-md w-full text-center animate-fade-in-up shadow-2xl border border-gray-800">
             <div className="mb-6">
-              <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-white text-3xl font-bold">✓</span>
+              <div className="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-black text-3xl font-bold">✓</span>
               </div>
               <h3 className="text-2xl font-bold text-white mb-3">
                 Tudo certo com o seu cadastro!
@@ -76,7 +76,7 @@ export default function Hero({ onOpenCreateAccount }) {
                   "_blank",
                 );
               }}
-              className="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-full font-bold text-base smooth-transition w-full mb-3"
+              className="bg-yellow-400 hover:bg-yellow-300 text-black px-8 py-3 rounded-full font-bold text-base smooth-transition w-full mb-3"
             >
               Abrir WhatsApp
             </button>
