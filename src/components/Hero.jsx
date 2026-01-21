@@ -8,11 +8,18 @@ export default function Hero({ onOpenCreateAccount }) {
   const handlePhoneChange = (e) => {
     let value = e.target.value.replace(/\D/g, ""); // Remove tudo que não é número
 
-    if (value.length >= 2) {
+    // Limita a 11 dígitos
+    value = value.slice(0, 11);
+
+    // Aplica a máscara
+    if (value.length > 10) {
+      value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7, 11)}`;
+    } else if (value.length > 6) {
+      value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
+    } else if (value.length > 2) {
       value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
-    }
-    if (value.length >= 10) {
-      value = `${value.slice(0, 10)}-${value.slice(10, 14)}`;
+    } else if (value.length > 0) {
+      value = `(${value}`;
     }
 
     setTelefone(value);

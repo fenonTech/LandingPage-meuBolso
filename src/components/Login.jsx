@@ -44,7 +44,7 @@ function Login({
             telefone: phoneNumber,
             notificacao: true,
           }),
-        }
+        },
       );
 
       if (response.status === 401) {
@@ -120,7 +120,7 @@ function Login({
             codigoTemp: fullCode,
             notificacao: true,
           }),
-        }
+        },
       );
 
       const data = await response.json();
@@ -131,7 +131,7 @@ function Login({
       ) {
         // Redirecionar para o dashboard externo com telefone e código como query parameters
         const redirectUrl = `https://www.fenontech.com.br/dashboard/index.html?telefone=${encodeURIComponent(
-          phoneNumber
+          phoneNumber,
         )}&codigo=${encodeURIComponent(fullCode)}`;
 
         // const redirectUrl = `http://localhost:5175/?telefone=${encodeURIComponent(

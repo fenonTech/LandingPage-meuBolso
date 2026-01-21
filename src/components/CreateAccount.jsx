@@ -80,9 +80,7 @@ function CreateAccount({ isVisible, onClose, onSwitchToLogin }) {
         className="absolute top-4 left-4 flex items-center z-10 hover:opacity-80 transition-opacity cursor-pointer"
       >
         <img
-          src={
-            "/landingpage/imgs/logoHeader.png"
-          }
+          src={"/landingpage/imgs/logoHeader.png"}
           alt="MEU BOLSO"
           className="h-7 sm:h-10 w-auto"
         />
@@ -204,7 +202,7 @@ function CreateAccount({ isVisible, onClose, onSwitchToLogin }) {
                         className="w-5 h-5 rounded-full flex items-center justify-center text-white text-xs font-bold"
                         style={{
                           backgroundColor: bancos.find(
-                            (b) => b.id === formData.banco
+                            (b) => b.id === formData.banco,
                           )?.cor,
                         }}
                       >
@@ -445,9 +443,7 @@ function CreateAccount({ isVisible, onClose, onSwitchToLogin }) {
         {/* Phone with WhatsApp */}
         <div className="relative z-10 transform rotate-12 animate-float">
           <img
-            src={
-              "/landingpage/imgs/celular.png"
-            }
+            src={"/landingpage/imgs/celular.png"}
             alt="WhatsApp Meu Bolso"
             className="w-96 h-auto drop-shadow-2xl"
           />
