@@ -68,9 +68,9 @@ export default function Plans({ isRenewal = false }) {
     <section
       id="plans"
       ref={sectionRef}
-      className="bg-black min-h-screen relative overflow-hidden py-8 sm:-mt-16 sm:py-0"
+      className="bg-black min-h-screen relative overflow-hidden py-8 sm:py-0"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-0">
         <div className="flex flex-col items-center justify-center min-h-screen text-center pt-16 pb-16 sm:pt-20 sm:pb-20">
           {/* Plans Badge */}
           <div

@@ -1,14 +1,29 @@
 import { useEffect, useRef, useState } from "react";
 
+// Map global para rastrear elementos que já foram animados
+const animatedElements = new WeakMap();
+
 export const useScrollAnimation = (threshold = 0.1) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef();
 
   useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
+    // Se esse elemento já foi animado, marca como visível imediatamente
+    if (animatedElements.has(element)) {
+      setIsVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
+          // Marca este elemento como já animado
+          animatedElements.set(element, true);
+          observer.disconnect();
         }
       },
       {
@@ -17,14 +32,10 @@ export const useScrollAnimation = (threshold = 0.1) => {
       },
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
+    observer.observe(element);
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
+      observer.disconnect();
     };
   }, [threshold]);
 
@@ -36,11 +47,23 @@ export const useStaggeredAnimation = (delay = 100) => {
   const ref = useRef();
 
   useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
+    // Se esse elemento já foi animado, marca como visível imediatamente
+    if (animatedElements.has(element)) {
+      setIsVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setTimeout(() => {
             setIsVisible(true);
+            // Marca este elemento como já animado
+            animatedElements.set(element, true);
+            observer.disconnect();
           }, delay);
         }
       },
@@ -50,14 +73,10 @@ export const useStaggeredAnimation = (delay = 100) => {
       },
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
+    observer.observe(element);
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
+      observer.disconnect();
     };
   }, [delay]);
 

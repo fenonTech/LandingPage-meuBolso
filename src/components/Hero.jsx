@@ -103,36 +103,35 @@ export default function Hero({ onOpenCreateAccount }) {
         </div>
       )}
 
-      <section className="bg-black min-h-screen relative overflow-hidden">
+      <section className="bg-black relative overflow-hidden">
         {/* Background elements */}
         <div className=" inset-0 pointer-events-none">
           {/* Floating card on the left - otimizado mobile */}
-          <div className="absolute -left-8 sm:-left-6 md:-left-8 top-[2%] sm:top-1/2 transform -translate-y-1/ -rotate-12 animate-fade-in-left animate-float">
+          <div className="hidden sm:block absolute -left-8 sm:-left-6 md:-left-8 top-[2%] sm:top-1/2 transform -translate-y-1/ -rotate-12 animate-fade-in-left animate-float">
             <img
-              src={"/landingpage/imgs/cartao.png"}
+              src="/landingpage/imgs/cartao.png"
               alt="Cartão Meu Bolso"
-              className="w-28 h-auto sm:w-48 md:w-64 lg:w-84 shadow-2xl rounded-2xl hover-lift smooth-transition opacity-80 sm:opacity-100"
+              className="w-48 md:w-64 lg:w-84 shadow-2xl rounded-2xl hover-lift smooth-transition"
             />
           </div>
         </div>
 
         {/* Floating safe/vault on the right - otimizado mobile */}
-        <div className="absolute -right-2 sm:-right-4 md:-right-10 bottom-[20%] sm:bottom-12 md:bottom-16 z-10 animate-fade-in-right animate-pulse-slow pointer-events-none">
+        <div className="hidden sm:block absolute -right-2 sm:-right-4 md:-right-10 bottom-[20%] sm:bottom-12 md:bottom-16 z-10 animate-fade-in-right animate-pulse-slow pointer-events-none">
           <div className="relative">
             <img
-              src={"/landingpage/imgs/cofrepng.png"}
+              src="/landingpage/imgs/cofrepng.png"
               alt="Cofre"
-              className="w-24 h-auto sm:w-48 md:w-64 md:h-70 lg:w-84 lg:h-84 hover-lift smooth-transition opacity-80 sm:opacity-100"
+              className="w-48 md:w-64 md:h-70 lg:w-84 lg:h-84 hover-lift smooth-transition"
             />
           </div>
         </div>
 
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col items-center justify-start sm:justify-center min-h-screen text-center pt-16 pb-4 sm:pt-0 sm:pb-20">
+          <div className="flex flex-col items-center justify-start text-center pt-12 pb-12 sm:pt-16 sm:pb-16">
             {/* Main heading - otimizado mobile */}
             <h1
-              className="text-[2rem] leading-tight sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-5 sm:mb-6 max-w-4xl animate-fade-in-up px-2"
-              style={{ animationDelay: "0.2s" }}
+              className="text-[1.75rem] leading-tight sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-5 max-w-4xl px-2"
             >
               Seu assistente de IA
               <br />
@@ -141,8 +140,7 @@ export default function Hero({ onOpenCreateAccount }) {
 
             {/* Subtitle - otimizado mobile */}
             <p
-              className="text-sm leading-relaxed sm:text-lg lg:text-xl text-gray-300 mb-8 sm:mb-12 max-w-3xl animate-fade-in-up px-4"
-              style={{ animationDelay: "0.4s" }}
+              className="text-xs leading-relaxed sm:text-base lg:text-lg text-gray-300 mb-6 sm:mb-8 max-w-3xl px-4"
             >
               Com o Meu Bolso você entende, acompanha e planeja seu dinheiro de
               forma simples, sem planilhas. Tenha mais controle, clareza e
@@ -151,8 +149,7 @@ export default function Hero({ onOpenCreateAccount }) {
 
             {/* Social icons - otimizado mobile */}
             <div
-              className="flex items-center gap-6 sm:gap-8 mb-8 sm:mb-12 animate-fade-in-up"
-              style={{ animationDelay: "0.6s" }}
+              className="flex items-center gap-6 sm:gap-8 mb-6 sm:mb-8"
             >
               <a
                 href="https://www.instagram.com/meubolsoia/"
@@ -188,10 +185,9 @@ export default function Hero({ onOpenCreateAccount }) {
 
             {/* Trial Section - otimizado mobile */}
             <div
-              className="w-full max-w-3xl mb-4 sm:mb-6 animate-fade-in-up px-4"
-              style={{ animationDelay: "0.7s" }}
+              className="w-full max-w-3xl mb-3 sm:mb-5 px-4"
             >
-              <h3 className="text-xl sm:text-3xl font-bold text-white mb-6 text-center">
+              <h3 className="text-lg sm:text-2xl font-bold text-white mb-4 sm:mb-5 text-center">
                 Resgate seu período de teste
               </h3>
               <div className="flex flex-col gap-3 items-center">
@@ -209,7 +205,7 @@ export default function Hero({ onOpenCreateAccount }) {
                     />
                     <button
                       onClick={handleTrialClick}
-                      className="gradient-button text-white px-6 py-2.5 rounded-full font-bold text-sm sm:text-base smooth-transition hover-lift active:scale-95 shadow-2xl whitespace-nowrap"
+                      className="gradient-button text-white px-6 py-2.5 rounded-full font-bold text-sm sm:text-sm smooth-transition hover-lift active:scale-95 shadow-2xl whitespace-nowrap"
                     >
                       Resgatar
                     </button>
@@ -227,13 +223,13 @@ export default function Hero({ onOpenCreateAccount }) {
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto justify-center items-center">
               <button
                 onClick={() => (window.location.hash = "/planos")}
-                className="bg-yellow-400 hover:bg-yellow-300 text-black px-6 sm:px-10 py-3 sm:py-4 rounded-full font-bold text-sm sm:text-lg smooth-transition hover-lift inline-flex items-center active:scale-95 shadow-lg hover:shadow-xl justify-center"
+                className="bg-yellow-400 hover:bg-yellow-300 text-black px-6 sm:px-8 py-3 sm:py-3 rounded-full font-bold text-sm sm:text-base smooth-transition hover-lift inline-flex items-center active:scale-95 shadow-lg hover:shadow-xl justify-center"
                 style={{ animationDelay: "0.8s" }}
               >
                 <img
                   src={"/landingpage/imgs/relogio.png"}
                   alt="Relógio"
-                  className="w-4 h-4 sm:w-6 sm:h-6 mr-2 flex-shrink-0 brightness-0"
+                  className="w-4 h-4 sm:w-5 sm:h-5 mr-2 flex-shrink-0 brightness-0"
                 />
                 <span>Escolha seu plano</span>
               </button>

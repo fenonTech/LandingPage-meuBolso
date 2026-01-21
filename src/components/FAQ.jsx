@@ -148,12 +148,12 @@ export default function FAQ() {
 
               <button
                 onClick={() => (window.location.hash = "/planos")}
-                className="gradient-button text-white px-8 sm:px-10 py-4 rounded-full font-bold text-base sm:text-lg smooth-transition hover-lift inline-flex items-center animate-pulse-slow active:scale-95 shadow-2xl w-full sm:w-auto justify-center"
+                className="bg-yellow-400 hover:bg-yellow-300 text-black px-6 sm:px-8 py-3 sm:py-3 rounded-full font-bold text-sm sm:text-base smooth-transition hover-lift inline-flex items-center active:scale-95 shadow-lg hover:shadow-xl justify-center"
               >
                 <img
                   src={"/landingpage/imgs/relogio.png"}
                   alt="Relógio"
-                  className="w-5 h-5 sm:w-6 sm:h-6 mr-2 animate-float flex-shrink-0"
+                  className="w-4 h-4 sm:w-5 sm:h-5 mr-2 flex-shrink-0 brightness-0"
                 />
                 <span>Escolha seu plano</span>
               </button>
