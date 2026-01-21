@@ -118,7 +118,7 @@ export default function Hero({ onOpenCreateAccount }) {
         </div>
 
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col items-center justify-start sm:justify-center min-h-screen text-center pt-32 pb-4 sm:pt-0 sm:pb-20">
+          <div className="flex flex-col items-center justify-start sm:justify-center min-h-screen text-center pt-16 pb-4 sm:pt-0 sm:pb-20">
             {/* Main heading - otimizado mobile */}
             <h1
               className="text-[2rem] leading-tight sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-5 sm:mb-6 max-w-4xl animate-fade-in-up px-2"
@@ -181,7 +181,7 @@ export default function Hero({ onOpenCreateAccount }) {
               className="w-full max-w-3xl mb-4 sm:mb-6 animate-fade-in-up px-4"
               style={{ animationDelay: "0.7s" }}
             >
-              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6 text-center">
+              <h3 className="text-xl sm:text-3xl font-bold text-white mb-6 text-center">
                 Resgate seu período de teste
               </h3>
               <div className="flex flex-col gap-3 items-center">
@@ -195,7 +195,7 @@ export default function Hero({ onOpenCreateAccount }) {
                       maxLength="15"
                       className={`w-full sm:w-[300px] bg-gray-900 border ${
                         showError ? "border-red-500" : "border-gray-800"
-                      } rounded-full px-4 py-2 text-sm text-gray-300 placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors autofill:bg-gray-900`}
+                      } rounded-full px-4 py-3 text-base text-gray-300 placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors autofill:bg-gray-900`}
                     />
                     <button
                       onClick={handleTrialClick}
@@ -217,13 +217,13 @@ export default function Hero({ onOpenCreateAccount }) {
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto justify-center items-center">
               <button
                 onClick={() => (window.location.hash = "/planos")}
-                className="bg-yellow-400 hover:bg-yellow-300 text-black px-8 sm:px-10 py-4 rounded-full font-bold text-base sm:text-lg smooth-transition hover-lift inline-flex items-center active:scale-95 shadow-lg hover:shadow-xl justify-center"
+                className="bg-yellow-400 hover:bg-yellow-300 text-black px-6 sm:px-10 py-3 sm:py-4 rounded-full font-bold text-sm sm:text-lg smooth-transition hover-lift inline-flex items-center active:scale-95 shadow-lg hover:shadow-xl justify-center"
                 style={{ animationDelay: "0.8s" }}
               >
                 <img
                   src={"/landingpage/imgs/relogio.png"}
                   alt="Relógio"
-                  className="w-5 h-5 sm:w-6 sm:h-6 mr-2 flex-shrink-0 brightness-0"
+                  className="w-4 h-4 sm:w-6 sm:h-6 mr-2 flex-shrink-0 brightness-0"
                 />
                 <span>Escolha seu plano</span>
               </button>

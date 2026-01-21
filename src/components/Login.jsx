@@ -216,7 +216,7 @@ function Login({
                     onChange={handlePhoneChange}
                     placeholder="(00) 00000-0000"
                     maxLength="15"
-                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-sm text-gray-300 placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors autofill:bg-gray-900"
+                    className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2.5 text-base text-gray-300 placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors autofill:bg-gray-900"
                     required
                   />
                 </div>

@@ -117,7 +117,7 @@ function CreateAccount({ isVisible, onClose, onSwitchToLogin }) {
                 value={formData.nome}
                 onChange={handleInputChange}
                 placeholder="Seu nome completo"
-                className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-1.5 text-sm text-gray-300 placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors autofill:bg-gray-900"
+                className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-base text-gray-300 placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors autofill:bg-gray-900"
                 required
               />
             </div>
@@ -132,7 +132,7 @@ function CreateAccount({ isVisible, onClose, onSwitchToLogin }) {
                 value={formData.email}
                 onChange={handleInputChange}
                 placeholder="seu@email.com"
-                className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-1.5 text-sm text-gray-300 placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors autofill:bg-gray-900"
+                className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-base text-gray-300 placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors autofill:bg-gray-900"
                 required
               />
             </div>
@@ -148,7 +148,7 @@ function CreateAccount({ isVisible, onClose, onSwitchToLogin }) {
                 value={formData.telefone}
                 onChange={handleInputChange}
                 placeholder="(00) 00000-0000"
-                className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-1.5 text-sm text-gray-300 placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors autofill:bg-gray-900"
+                className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-base text-gray-300 placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors autofill:bg-gray-900"
                 required
               />
             </div>
@@ -165,7 +165,7 @@ function CreateAccount({ isVisible, onClose, onSwitchToLogin }) {
                 onChange={handleInputChange}
                 placeholder="DD/MM/AAAA"
                 maxLength="10"
-                className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-1.5 text-sm text-gray-300 placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors autofill:bg-gray-900"
+                className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-base text-gray-300 placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors autofill:bg-gray-900"
                 required
               />
             </div>
@@ -182,7 +182,7 @@ function CreateAccount({ isVisible, onClose, onSwitchToLogin }) {
                 onChange={handleInputChange}
                 placeholder="000.000.000-00"
                 maxLength="14"
-                className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-1.5 text-sm text-gray-300 placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors autofill:bg-gray-900"
+                className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-base text-gray-300 placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors autofill:bg-gray-900"
                 required
               />
             </div>
@@ -274,7 +274,7 @@ function CreateAccount({ isVisible, onClose, onSwitchToLogin }) {
                   value={formData.senha}
                   onChange={handleInputChange}
                   placeholder="Digite sua senha"
-                  className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-1.5 text-sm text-gray-300 placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors pr-10 autofill:bg-gray-900"
+                  className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-base text-gray-300 placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors pr-10 autofill:bg-gray-900"
                   required
                 />
                 <button
@@ -333,7 +333,7 @@ function CreateAccount({ isVisible, onClose, onSwitchToLogin }) {
                   value={formData.confirmarSenha}
                   onChange={handleInputChange}
                   placeholder="Confirme sua senha"
-                  className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-1.5 text-sm text-gray-300 placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors pr-10 autofill:bg-gray-900"
+                  className="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-base text-gray-300 placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors pr-10 autofill:bg-gray-900"
                   required
                 />
                 <button
