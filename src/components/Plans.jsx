@@ -68,10 +68,10 @@ export default function Plans({ isRenewal = false }) {
     <section
       id="plans"
       ref={sectionRef}
-      className="bg-black min-h-screen relative overflow-hidden -mt-16 sm:mt-0"
+      className="bg-black min-h-screen relative overflow-hidden py-8 sm:-mt-16 sm:py-0"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex flex-col items-center justify-center min-h-screen text-center pt-20 pb-12 sm:py-20">
+        <div className="flex flex-col items-center justify-center min-h-screen text-center pt-16 pb-16 sm:pt-20 sm:pb-20">
           {/* Plans Badge */}
           <div
             className={`bg-yellow-400 text-black px-4 py-2 rounded-full font-bold text-sm mb-8 transition-all duration-700 ${
@@ -118,7 +118,7 @@ export default function Plans({ isRenewal = false }) {
 
           {/* Period Selector */}
           <div
-            className={`flex items-center justify-center gap-2 mb-12 transition-all duration-1000 delay-150 ${
+            className={`flex items-center justify-center gap-2 mb-8 sm:mb-12 transition-all duration-1000 delay-150 ${
               isVisible
                 ? "animate-fade-in-up"
                 : "opacity-0 transform translate-y-8"
@@ -167,11 +167,11 @@ export default function Plans({ isRenewal = false }) {
           </div>
 
           {/* Plans Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-7xl w-full mx-auto mb-12 px-4 items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-7xl w-full mx-auto mb-8 sm:mb-12 px-4 items-stretch">
             {/* Plano Essencial */}
             <div
               ref={plan1Ref}
-              className={`rounded-2xl p-6 border-2 border-white shadow-lg hover:shadow-xl hover-lift smooth-transition transition-all duration-1000 relative overflow-hidden flex flex-col ${
+              className={`rounded-2xl p-5 sm:p-6 border-2 border-white shadow-lg hover:shadow-xl hover-lift smooth-transition transition-all duration-1000 relative overflow-hidden flex flex-col ${
                 plan1Visible
                   ? "animate-fade-in-up"
                   : "opacity-0 transform translate-y-8"
@@ -288,7 +288,7 @@ export default function Plans({ isRenewal = false }) {
             {/* Plano Inteligente - Highlighted */}
             <div
               ref={plan2Ref}
-              className={`rounded-2xl p-6 border-2 border-yellow-400 shadow-xl hover:shadow-2xl relative hover-lift smooth-transition transition-all duration-1000 overflow-hidden flex flex-col ${
+              className={`rounded-2xl p-5 sm:p-6 border-2 border-yellow-400 shadow-xl hover:shadow-2xl relative hover-lift smooth-transition transition-all duration-1000 overflow-hidden flex flex-col ${
                 plan2Visible
                   ? "animate-scale-in"
                   : "opacity-0 transform scale-90"
@@ -403,7 +403,7 @@ export default function Plans({ isRenewal = false }) {
             {/* Plano Visionário */}
             <div
               ref={plan3Ref}
-              className={`rounded-2xl p-6 border-2 border-white shadow-lg hover:shadow-xl hover-lift smooth-transition transition-all duration-1000 relative overflow-hidden flex flex-col ${
+              className={`rounded-2xl p-5 sm:p-6 border-2 border-white shadow-lg hover:shadow-xl hover-lift smooth-transition transition-all duration-1000 relative overflow-hidden flex flex-col ${
                 plan3Visible
                   ? "animate-fade-in-up"
                   : "opacity-0 transform translate-y-8"

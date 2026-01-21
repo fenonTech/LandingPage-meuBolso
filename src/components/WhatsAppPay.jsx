@@ -7,10 +7,10 @@ export default function WhatsAppPay() {
     <section
       id="whatsapp"
       ref={sectionRef}
-      className="bg-black min-h-screen relative overflow-hidden -mt-32 sm:mt-0"
+      className="bg-black relative overflow-hidden pt-8 pb-12 sm:-mt-32 sm:min-h-screen sm:py-0"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex flex-col items-center justify-center min-h-screen text-center py-4 sm:py-20">
+        <div className="flex flex-col items-center justify-center sm:min-h-screen text-center sm:py-20">
           {/* WhatsApp Badge */}
           <div
             className={`bg-yellow-400 text-black px-4 py-2 rounded-full font-bold text-sm mb-8 transition-all duration-700 ${
