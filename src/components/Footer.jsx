@@ -107,7 +107,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-dark-700 pt-6 sm:pt-8 flex flex-col md:flex-row justify-center items-center gap-4">
           <p className="text-gray-400 text-xs sm:text-sm text-center md:text-left">
-            © 2024 Meu Bolso. Todos os direitos reservados.
+            © 2026 Meu Bolso. Todos os direitos reservados.
           </p>
         </div>
       </div>
