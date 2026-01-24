@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
-export default function FAQ() {
+function FAQ() {
   const [openIndex, setOpenIndex] = useState(4); // Question about plan differences open by default
   const [sectionRef, isVisible] = useScrollAnimation(0.1);
 
@@ -164,3 +164,5 @@ export default function FAQ() {
     </section>
   );
 }
+
+export default memo(FAQ);

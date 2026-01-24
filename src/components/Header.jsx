@@ -1,4 +1,6 @@
-export default function Header({ onOpenCreateAccount, onOpenLogin }) {
+import { memo } from "react";
+
+function Header({ onOpenCreateAccount, onOpenLogin }) {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -78,3 +80,5 @@ export default function Header({ onOpenCreateAccount, onOpenLogin }) {
     </header>
   );
 }
+
+export default memo(Header);

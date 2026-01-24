@@ -2,9 +2,9 @@ import {
   useScrollAnimation,
   useStaggeredAnimation,
 } from "../hooks/useScrollAnimation";
-import { useState } from "react";
+import { useState, memo, useMemo, useCallback } from "react";
 
-export default function Plans({ isRenewal = false }) {
+function Plans({ isRenewal = false }) {
   const [sectionRef, isVisible] = useScrollAnimation(0.2);
   const [plan1Ref, plan1Visible] = useStaggeredAnimation(100);
   const [plan2Ref, plan2Visible] = useStaggeredAnimation(200);
@@ -505,3 +505,5 @@ export default function Plans({ isRenewal = false }) {
     </section>
   );
 }
+
+export default memo(Plans);

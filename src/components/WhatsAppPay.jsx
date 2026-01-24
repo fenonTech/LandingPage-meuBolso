@@ -1,6 +1,7 @@
+import { memo } from "react";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
-export default function WhatsAppPay() {
+function WhatsAppPay() {
   const [sectionRef, isVisible] = useScrollAnimation(0.2);
 
   return (
@@ -72,3 +73,5 @@ export default function WhatsAppPay() {
     </section>
   );
 }
+
+export default memo(WhatsAppPay);

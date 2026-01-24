@@ -1,6 +1,7 @@
+import { memo } from "react";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
-export default function Dashboard() {
+function Dashboard() {
   const [sectionRef, isVisible] = useScrollAnimation(0.2);
 
   return (
@@ -99,3 +100,5 @@ export default function Dashboard() {
     </section>
   );
 }
+
+export default memo(Dashboard);

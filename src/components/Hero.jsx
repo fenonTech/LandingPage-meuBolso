@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 
-export default function Hero({ onOpenCreateAccount }) {
+function Hero({ onOpenCreateAccount }) {
   const [telefone, setTelefone] = useState("");
   const [showError, setShowError] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -232,3 +232,5 @@ export default function Hero({ onOpenCreateAccount }) {
     </>
   );
 }
+
+export default memo(Hero);

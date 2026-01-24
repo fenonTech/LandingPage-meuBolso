@@ -15,18 +15,40 @@ function App() {
   const navigate = useNavigate();
   const [showScrollTop, setShowScrollTop] = useState(false);
 
-  // Detectar scroll para mostrar/ocultar botão
+  // Detectar scroll para mostrar/ocultar botão com throttling
   useEffect(() => {
+    let timeoutId = null;
+    let lastScrollY = window.scrollY;
+    
     const handleScroll = () => {
-      if (window.scrollY > 300) {
-        setShowScrollTop(true);
-      } else {
-        setShowScrollTop(false);
+      // Throttling - só atualiza se houver mudança significativa
+      const currentScrollY = window.scrollY;
+      const scrollDiff = Math.abs(currentScrollY - lastScrollY);
+      
+      // Só atualiza se scrollou mais de 50px
+      if (scrollDiff < 50) return;
+      
+      lastScrollY = currentScrollY;
+      
+      // Usa requestAnimationFrame para performance
+      if (timeoutId) {
+        cancelAnimationFrame(timeoutId);
       }
+      
+      timeoutId = requestAnimationFrame(() => {
+        const shouldShow = currentScrollY > 300;
+        setShowScrollTop(prev => prev !== shouldShow ? shouldShow : prev);
+      });
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (timeoutId) {
+        cancelAnimationFrame(timeoutId);
+      }
+    };
   }, []);
 
   // Função para voltar ao topo

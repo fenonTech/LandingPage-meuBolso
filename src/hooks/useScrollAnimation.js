@@ -1,69 +1,97 @@
 import { useEffect, useRef, useState } from "react";
 
-// Map global para rastrear elementos que já foram animados
-const animatedElements = new WeakMap();
+// Gera um ID único para cada elemento baseado em sua posição na página
+const generateElementId = (element) => {
+  if (!element) return null;
+  
+  // Usa o id do elemento se existir
+  if (element.id) return `elem-${element.id}`;
+  
+  // Usa uma combinação de tag, classes e posição como identificador único
+  const tagName = element.tagName;
+  const className = element.className || '';
+  const siblings = element.parentElement ? Array.from(element.parentElement.children) : [];
+  const index = siblings.indexOf(element);
+  
+  return `elem-${tagName}-${className.substring(0, 20)}-${index}`;
+};
+
+// Verifica se um elemento já foi animado (persiste no sessionStorage)
+const hasBeenAnimated = (elementId) => {
+  if (!elementId) return false;
+  try {
+    return sessionStorage.getItem(`animated-${elementId}`) === 'true';
+  } catch {
+    return false;
+  }
+};
+
+// Marca um elemento como animado (persiste no sessionStorage)
+const markAsAnimated = (elementId) => {
+  if (!elementId) return;
+  try {
+    sessionStorage.setItem(`animated-${elementId}`, 'true');
+  } catch {
+    // Ignora erros de storage (modo privado, etc)
+  }
+};
 
 export const useScrollAnimation = (threshold = 0.1) => {
   const ref = useRef();
+  const elementIdRef = useRef(null);
   const hasAnimatedRef = useRef(false);
   const observerRef = useRef(null);
   
-  // Verifica se o elemento já foi animado antes de inicializar o estado
-  const [isVisible, setIsVisible] = useState(() => {
-    // Esta função só roda uma vez na inicialização
-    return false;
-  });
-
-  // Função wrapper para setIsVisible que garante que nunca volte para false
-  const setVisibleOnceRef = useRef(null);
-  if (!setVisibleOnceRef.current) {
-    setVisibleOnceRef.current = (value) => {
-      if (value === true) {
-        setIsVisible(true);
-      }
-    };
-  }
-  const setVisibleOnce = setVisibleOnceRef.current;
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
 
-    // Se esse elemento já foi animado, marca como visível imediatamente e não cria observer
-    if (animatedElements.has(element) || hasAnimatedRef.current) {
-      // Força o estado para true e garante que não mude mais
-      setVisibleOnce(true);
-      // Adiciona classe para manter estado final
+    // Gera ID do elemento apenas uma vez
+    if (!elementIdRef.current) {
+      elementIdRef.current = generateElementId(element);
+    }
+
+    const elementId = elementIdRef.current;
+
+    // Verifica se já foi animado anteriormente
+    const alreadyAnimated = hasBeenAnimated(elementId);
+    
+    if (alreadyAnimated || hasAnimatedRef.current) {
+      // Força visibilidade imediata e adiciona classes permanentes
+      if (!isVisible) {
+        setIsVisible(true);
+      }
       element.classList.add("animated-once");
-      // Garante que elementos filhos também tenham a classe
-      const childrenWithTransitions = element.querySelectorAll('[class*="transition"]');
-      childrenWithTransitions.forEach(child => {
-        child.classList.add("animated-once");
-      });
+      element.style.opacity = '1';
+      element.style.transform = 'none';
       return;
     }
 
-    // Se já existe um observer, não cria outro
+    // Previne criação de múltiplos observers
     if (observerRef.current) return;
 
     observerRef.current = new IntersectionObserver(
       ([entry]) => {
-        // Só anima se ainda não foi animado e está visível
         if (entry.isIntersecting && !hasAnimatedRef.current) {
-          setVisibleOnce(true);
           hasAnimatedRef.current = true;
-          // Marca este elemento como já animado
-          animatedElements.set(element, true);
+          setIsVisible(true);
           
-          // Adiciona classe imediatamente para evitar reanimação
-          element.classList.add("animated-once");
-          // Também adiciona aos elementos filhos que podem ter transições
-          const childrenWithTransitions = element.querySelectorAll('[class*="transition"]');
-          childrenWithTransitions.forEach(child => {
-            child.classList.add("animated-once");
+          // Marca como animado no storage
+          markAsAnimated(elementId);
+          
+          // Adiciona classes permanentes após a animação
+          requestAnimationFrame(() => {
+            element.classList.add("animated-once");
+            // Garante que o estado final seja aplicado
+            setTimeout(() => {
+              element.style.opacity = '1';
+              element.style.transform = 'none';
+            }, 700); // Aguarda a duração da animação
           });
           
-          // Desconecta o observer imediatamente após animar
+          // Desconecta o observer
           if (observerRef.current) {
             observerRef.current.disconnect();
             observerRef.current = null;
@@ -91,68 +119,63 @@ export const useScrollAnimation = (threshold = 0.1) => {
 
 export const useStaggeredAnimation = (delay = 100) => {
   const ref = useRef();
+  const elementIdRef = useRef(null);
   const hasAnimatedRef = useRef(false);
   const observerRef = useRef(null);
+  const timeoutRef = useRef(null);
   
-  // Verifica se o elemento já foi animado antes de inicializar o estado
-  const [isVisible, setIsVisible] = useState(() => {
-    // Esta função só roda uma vez na inicialização
-    return false;
-  });
-
-  // Função wrapper para setIsVisible que garante que nunca volte para false
-  const setVisibleOnceRef = useRef(null);
-  if (!setVisibleOnceRef.current) {
-    setVisibleOnceRef.current = (value) => {
-      if (value === true) {
-        setIsVisible(true);
-      }
-    };
-  }
-  const setVisibleOnce = setVisibleOnceRef.current;
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
 
-    // Se esse elemento já foi animado, marca como visível imediatamente e não cria observer
-    if (animatedElements.has(element) || hasAnimatedRef.current) {
-      // Força o estado para true e garante que não mude mais
-      setVisibleOnce(true);
-      // Adiciona classe para manter estado final
+    // Gera ID do elemento apenas uma vez
+    if (!elementIdRef.current) {
+      elementIdRef.current = generateElementId(element);
+    }
+
+    const elementId = elementIdRef.current;
+
+    // Verifica se já foi animado anteriormente
+    const alreadyAnimated = hasBeenAnimated(elementId);
+    
+    if (alreadyAnimated || hasAnimatedRef.current) {
+      // Força visibilidade imediata e adiciona classes permanentes
+      if (!isVisible) {
+        setIsVisible(true);
+      }
       element.classList.add("animated-once");
-      // Garante que elementos filhos também tenham a classe
-      const childrenWithTransitions = element.querySelectorAll('[class*="transition"]');
-      childrenWithTransitions.forEach(child => {
-        child.classList.add("animated-once");
-      });
+      element.style.opacity = '1';
+      element.style.transform = 'none';
       return;
     }
 
-    // Se já existe um observer, não cria outro
+    // Previne criação de múltiplos observers
     if (observerRef.current) return;
 
     observerRef.current = new IntersectionObserver(
       ([entry]) => {
-        // Só anima se ainda não foi animado e está visível
         if (entry.isIntersecting && !hasAnimatedRef.current) {
           hasAnimatedRef.current = true;
-          setTimeout(() => {
-            setVisibleOnce(true);
-            // Marca este elemento como já animado
-            animatedElements.set(element, true);
+          
+          timeoutRef.current = setTimeout(() => {
+            setIsVisible(true);
             
-            // Adiciona classe imediatamente após o delay para evitar reanimação
-            setTimeout(() => {
+            // Marca como animado no storage
+            markAsAnimated(elementId);
+            
+            // Adiciona classes permanentes após a animação
+            requestAnimationFrame(() => {
               element.classList.add("animated-once");
-              // Também adiciona aos elementos filhos que podem ter transições
-              const childrenWithTransitions = element.querySelectorAll('[class*="transition"]');
-              childrenWithTransitions.forEach(child => {
-                child.classList.add("animated-once");
-              });
-            }, delay + 50);
+              // Garante que o estado final seja aplicado
+              setTimeout(() => {
+                element.style.opacity = '1';
+                element.style.transform = 'none';
+              }, 700); // Aguarda a duração da animação
+            });
             
-            // Desconecta o observer imediatamente após animar
+            // Desconecta o observer
             if (observerRef.current) {
               observerRef.current.disconnect();
               observerRef.current = null;
@@ -169,6 +192,9 @@ export const useStaggeredAnimation = (delay = 100) => {
     observerRef.current.observe(element);
 
     return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
       if (observerRef.current) {
         observerRef.current.disconnect();
         observerRef.current = null;
