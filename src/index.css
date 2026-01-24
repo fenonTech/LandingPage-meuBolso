@@ -205,9 +205,3 @@ section[id] {
 .animated-once {
   will-change: auto;
 }
-
-/* Previne layout shift durante carregamento */
-section[id] {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 500px;
-}
