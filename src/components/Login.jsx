@@ -98,13 +98,13 @@ function Login({
   const handleCodePaste = (e) => {
     e.preventDefault();
     const pastedData = e.clipboardData.getData("text").replace(/\s/g, ""); // Remove espaços
-    
+
     // Verifica se é alfanumérico
     if (!/^[a-zA-Z0-9]+$/.test(pastedData)) return;
-    
+
     // Pega os primeiros 6 caracteres
     const chars = pastedData.slice(0, 6).toLowerCase().split("");
-    
+
     // Preenche os campos
     const newCode = [...code];
     chars.forEach((char, index) => {
@@ -113,7 +113,7 @@ function Login({
       }
     });
     setCode(newCode);
-    
+
     // Foca no próximo campo vazio ou no último se todos foram preenchidos
     const nextEmptyIndex = newCode.findIndex((digit) => !digit);
     const focusIndex = nextEmptyIndex !== -1 ? nextEmptyIndex : 5;
