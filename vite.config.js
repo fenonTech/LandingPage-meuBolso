@@ -20,7 +20,7 @@ export default defineConfig({
   // Otimizações de performance
   esbuild: {
     logOverride: { "this-is-undefined-in-esm": "silent" },
-    drop: ['debugger'],
-    pure: ['console.log'],
+    drop: ["debugger"],
+    pure: ["console.log"],
   },
 });
