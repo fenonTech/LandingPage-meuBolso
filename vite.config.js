@@ -11,14 +11,8 @@ export default defineConfig({
         planos: "./planos.html",
       },
     },
-    // Otimizações para produção
-    minify: "terser",
-    terserOptions: {
-      compress: {
-        drop_console: false,
-        pure_funcs: ["console.log"],
-      },
-    },
+    // Otimizações para produção (usando esbuild que é mais rápido)
+    minify: "esbuild",
     // Melhora code splitting
     chunkSizeWarningLimit: 1000,
     cssCodeSplit: true,
@@ -26,5 +20,7 @@ export default defineConfig({
   // Otimizações de performance
   esbuild: {
     logOverride: { "this-is-undefined-in-esm": "silent" },
+    drop: ['debugger'],
+    pure: ['console.log'],
   },
 });
