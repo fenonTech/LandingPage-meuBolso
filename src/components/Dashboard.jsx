@@ -22,7 +22,7 @@ function Dashboard() {
             {/* Dashboard Image - Left Side (2 columns) */}
             <div className="lg:col-span-2">
               <img
-                src={"../landingpage/imgs/dashboard.png"}
+                src="/landingpage/imgs/dashboard.png"
                 alt="Dashboard Financeiro"
                 className="w-full rounded-xl sm:rounded-2xl shadow-2xl"
                 style={{ height: "350px", objectFit: "contain" }}
