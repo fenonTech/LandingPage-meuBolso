@@ -16,7 +16,19 @@ body {
 }
 
 /* Desabilitar todas as animações e transições em imagens */
-img {
+img,
+img * {
+  animation: none !important;
+  transition: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+  will-change: auto !important;
+}
+
+/* Garantir que divs contendo imagens também não tenham animação */
+div > img,
+section img,
+.lg\:col-span-2 img {
   animation: none !important;
   transition: none !important;
   opacity: 1 !important;

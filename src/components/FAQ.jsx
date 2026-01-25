@@ -115,13 +115,7 @@ function FAQ() {
         <div className="bg-gradient-to-br from-gray-900/50 to-gray-900/30 border border-gray-800 rounded-2xl p-8 sm:p-10 lg:p-12">
           <div className="flex justify-center items-center">
             {/* Center Content */}
-            <div
-              className={`text-center transition-all duration-1000 delay-600 ${
-                isVisible
-                  ? "animate-fade-in-up"
-                  : "opacity-0 transform translate-y-8"
-              }`}
-            >
+            <div className="text-center">
               <h2 className="text-[1.75rem] leading-tight sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 lg:mb-8">
                 Pronto para organizar suas finanças?
               </h2>
