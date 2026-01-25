@@ -98,7 +98,7 @@ section[id] {
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(0px);
   }
 }
 
@@ -108,7 +108,7 @@ section[id] {
     transform: scale(1);
   }
   50% {
-    transform: scale(1.05);
+    transform: scale(1);
   }
 }
 
@@ -137,6 +137,15 @@ section[id] {
   transform: none !important;
 }
 
+/* Desabilitar animações de float e pulse */
+.animate-float {
+  animation: none !important;
+}
+
+.animate-pulse-slow {
+  animation: none !important;
+}
+
 /* Classes para manter estado final após animação */
 .animated-once {
   opacity: 1 !important;
@@ -154,14 +163,6 @@ section[id] {
 /* Garante que elementos animados mantenham estado final mesmo em remontagem */
 .animated-once > * {
   opacity: 1 !important;
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-.animate-pulse-slow {
-  animation: pulse 2s ease-in-out infinite;
 }
 
 /* Elementos inicialmente invisíveis - DESABILITADO */
