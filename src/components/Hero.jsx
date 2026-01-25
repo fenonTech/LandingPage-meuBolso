@@ -111,7 +111,7 @@ function Hero({ onOpenCreateAccount }) {
             <img
               src="/landingpage/imgs/cartao.png"
               alt="Cartão Meu Bolso"
-              className="w-48 md:w-64 lg:w-84 shadow-2xl rounded-2xl hover-lift smooth-transition"
+              className="w-48 md:w-64 lg:w-84 shadow-2xl rounded-2xl"
             />
           </div>
         </div>
@@ -122,7 +122,7 @@ function Hero({ onOpenCreateAccount }) {
             <img
               src="/landingpage/imgs/cofrepng.png"
               alt="Cofre"
-              className="w-48 md:w-64 md:h-70 lg:w-84 lg:h-84 hover-lift smooth-transition"
+              className="w-48 md:w-64 md:h-70 lg:w-84 lg:h-84"
             />
           </div>
         </div>

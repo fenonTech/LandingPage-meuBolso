@@ -24,7 +24,7 @@ function Dashboard() {
               <img
                 src={"../landingpage/imgs/dashboard.png"}
                 alt="Dashboard Financeiro"
-                className="w-full rounded-xl sm:rounded-2xl shadow-2xl hover-lift smooth-transition"
+                className="w-full rounded-xl sm:rounded-2xl shadow-2xl"
                 style={{ height: "350px", objectFit: "contain" }}
               />
             </div>
