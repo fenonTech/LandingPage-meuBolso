@@ -49,17 +49,13 @@ function Checkout() {
   const [errorMessage, setErrorMessage] = useState("");
   const [showPixModal, setShowPixModal] = useState(false);
   const [pixData, setPixData] = useState({ qrCode: "", pixCode: "", expiresAt: "" });
+  const [cardCheckoutUrl, setCardCheckoutUrl] = useState("");
 
   const [formData, setFormData] = useState({
     customerName: "",
     customerEmail: "",
     customerTaxId: "",
     customerPhone: "",
-    cardHolderName: "",
-    cardNumber: "",
-    cardExpiryMonth: "",
-    cardExpiryYear: "",
-    cardCvv: "",
   });
 
   const cardPayload = useMemo(
@@ -136,8 +132,19 @@ function Checkout() {
       responseData?.data?.pix_copia_cola ||
       "";
 
-    const qrCodeBase64 = pix?.qr_code_base64 || responseData?.qr_code_base64 || "";
-    const qrCode = qrCodeBase64 ? `data:image/png;base64,${qrCodeBase64}` : "";
+    const qrSource =
+      pix?.qr_code_base64 ||
+      pix?.qr_code ||
+      responseData?.qr_code_base64 ||
+      responseData?.qr_code ||
+      "";
+
+    const qrCode = qrSource
+      ? qrSource.startsWith("data:image") || qrSource.startsWith("http")
+        ? qrSource
+        : `data:image/png;base64,${qrSource}`
+      : "";
+
     const expiresAt = pix?.expires_at || responseData?.expires_at || "";
 
     return { qrCode, pixCode, expiresAt };
@@ -156,6 +163,7 @@ function Checkout() {
   const createPayment = async () => {
     setIsLoading(true);
     setErrorMessage("");
+    setCardCheckoutUrl("");
 
     const isPix = paymentMethod === "pix";
     const endpoint = isPix
@@ -207,12 +215,11 @@ function Checkout() {
 
       const redirectUrl = getCardRedirect(data);
 
-      if (redirectUrl) {
-        window.location.href = redirectUrl;
-        return;
+      if (!redirectUrl) {
+        throw new Error("A API não retornou checkout_url para pagamento com cartão.");
       }
 
-      navigate("/obrigado");
+      setCardCheckoutUrl(redirectUrl);
     } catch (error) {
       setErrorMessage(error.message || "Erro ao criar pagamento.");
     } finally {
@@ -307,17 +314,23 @@ function Checkout() {
 
                 {paymentMethod === "cartao" && (
                   <div className="rounded-xl border border-dark-700 bg-black/20 p-4 space-y-4">
-                    <h3 className="text-yellow-400 font-semibold">Tela de cartão</h3>
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      <Input label="Nome no cartão" name="cardHolderName" value={formData.cardHolderName} onChange={handleInputChange} />
-                      <Input label="Número do cartão" name="cardNumber" value={formData.cardNumber} onChange={handleInputChange} />
-                      <Input label="Mês (MM)" name="cardExpiryMonth" value={formData.cardExpiryMonth} onChange={handleInputChange} />
-                      <Input label="Ano (AAAA)" name="cardExpiryYear" value={formData.cardExpiryYear} onChange={handleInputChange} />
-                      <Input label="CVV" name="cardCvv" value={formData.cardCvv} onChange={handleInputChange} />
-                    </div>
-                    <p className="text-xs text-gray-400">
-                      Os dados enviados seguem o body de <code>/api/pagamentos/cartao</code>, incluindo <code>completion_url</code>.
+                    <h3 className="text-yellow-400 font-semibold">Pagamento com cartão</h3>
+                    <p className="text-sm text-gray-300">
+                      Ao clicar em pagar, vamos chamar a API e gerar o link de checkout do cartão.
                     </p>
+                    <p className="text-xs text-gray-400">
+                      Nenhum dado de cartão é coletado aqui. O usuário finaliza no link retornado por <code>checkout_url</code>.
+                    </p>
+                    {cardCheckoutUrl && (
+                      <a
+                        href={cardCheckoutUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="w-full inline-flex justify-center bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-3 rounded-lg"
+                      >
+                        Ir para o pagamento com cartão
+                      </a>
+                    )}
                   </div>
                 )}
 
