@@ -305,13 +305,29 @@ function Checkout() {
 
                 {paymentMethod === "pix" && (
                   <div className="rounded-xl border border-dark-700 bg-black/20 p-4">
+<<<<<<< codex/create-checkout-page-with-golden-theme-4ujozx
                     <p className="text-gray-200 text-lg font-medium">Escolha Pix para pagar.</p>
+=======
+                    <p className="text-gray-200 text-lg font-medium mb-2">Escolha Pix para pagar.</p>
+                    <p className="text-gray-400 text-sm">
+                      Ao clicar em pagar, vamos gerar o qr_code e o pix_copia_cola pela API.
+                    </p>
+>>>>>>> main
                   </div>
                 )}
 
                 {paymentMethod === "cartao" && (
                   <div className="rounded-xl border border-dark-700 bg-black/20 p-4 space-y-4">
                     <h3 className="text-yellow-400 font-semibold">Pagamento com cartão</h3>
+<<<<<<< codex/create-checkout-page-with-golden-theme-4ujozx
+=======
+                    <p className="text-sm text-gray-300">
+                      Ao clicar em pagar, vamos chamar a API e gerar o link de checkout do cartão.
+                    </p>
+                    <p className="text-xs text-gray-400">
+                      Nenhum dado de cartão é coletado aqui. O usuário finaliza no link retornado por <code>checkout_url</code>.
+                    </p>
+>>>>>>> main
                     {cardCheckoutUrl && (
                       <a
                         href={cardCheckoutUrl}
