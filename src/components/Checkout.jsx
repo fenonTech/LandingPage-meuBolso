@@ -39,14 +39,12 @@ function Checkout() {
   const [errorMessage, setErrorMessage] = useState("");
   const [showPixModal, setShowPixModal] = useState(false);
   const [pixData, setPixData] = useState({ qrCode: "", pixCode: "" });
-  const [apiResponse, setApiResponse] = useState(null);
 
   const [formData, setFormData] = useState({
     customerName: "",
     customerEmail: "",
     customerTaxId: "",
     customerPhone: "",
-    returnUrl: "",
     cardHolderName: "",
     cardNumber: "",
     cardExpiryMonth: "",
@@ -64,18 +62,11 @@ function Checkout() {
       email: formData.customerEmail,
       celular: formData.customerPhone,
       cpf_cnpj: formData.customerTaxId,
-      retorno_url: formData.returnUrl || window.location.href,
+      retorno_url: window.location.href,
     }),
     [amountInCents, billingCycle, formData, selectedPlan]
   );
 
-  const checkoutPayloadPreview = useMemo(
-    () => ({
-      metodo_pagamento: paymentMethod,
-      ...pagamentoBaseBody,
-    }),
-    [pagamentoBaseBody, paymentMethod]
-  );
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -158,7 +149,6 @@ function Checkout() {
       });
 
       const data = await response.json().catch(() => ({}));
-      setApiResponse(data);
 
       if (!response.ok) {
         const message = data?.message || data?.erro || "Não foi possível criar o pagamento.";
@@ -180,10 +170,11 @@ function Checkout() {
       const redirectUrl = getCardRedirect(data);
 
       if (redirectUrl) {
-        window.open(redirectUrl, "_blank");
-      } else {
-        alert("Pagamento com cartão criado com sucesso!");
+        window.location.href = redirectUrl;
+        return;
       }
+
+      navigate("/obrigado");
     } catch (error) {
       setErrorMessage(error.message || "Erro ao criar pagamento.");
     } finally {
@@ -292,16 +283,6 @@ function Checkout() {
                   </div>
                 )}
 
-                <div>
-                  <Input
-                    label="URL de retorno (opcional)"
-                    name="returnUrl"
-                    value={formData.returnUrl}
-                    onChange={handleInputChange}
-                    placeholder="https://seusite.com/obrigado"
-                  />
-                </div>
-
                 <div className="flex flex-col sm:flex-row gap-3">
                   <button
                     type="button"
@@ -344,22 +325,11 @@ function Checkout() {
                 <span>{paymentMethod === "pix" ? "Pix" : "Cartão"}</span>
               </p>
             </div>
-
             <div className="border-t border-dark-700 pt-4">
-              <p className="text-xs text-gray-400 mb-2">Body enviado para API</p>
-              <pre className="text-xs bg-black/40 rounded-lg p-3 overflow-auto max-h-72 border border-dark-700 text-gray-300">
-                {JSON.stringify(checkoutPayloadPreview, null, 2)}
-              </pre>
+              <p className="text-xs text-gray-400">
+                Os dados do checkout são enviados de forma automática para a API de pagamentos.
+              </p>
             </div>
-
-            {apiResponse && (
-              <div className="border-t border-dark-700 pt-4">
-                <p className="text-xs text-gray-400 mb-2">Última resposta da API</p>
-                <pre className="text-xs bg-black/40 rounded-lg p-3 overflow-auto max-h-72 border border-dark-700 text-gray-300">
-                  {JSON.stringify(apiResponse, null, 2)}
-                </pre>
-              </div>
-            )}
 
             <Link to="/planos" className="inline-block text-yellow-400 hover:text-yellow-300 text-sm">
               Escolher outro plano
