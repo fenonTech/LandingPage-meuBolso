@@ -26,6 +26,14 @@ const formatCurrency = (valueInCents) =>
 
 const API_BASE_URL = "https://backend-pearl-rho-82.vercel.app/api";
 
+const getAbsoluteHashUrl = (hashPath) => {
+  if (typeof window === "undefined") {
+    return hashPath;
+  }
+
+  return `${window.location.origin}${window.location.pathname}#${hashPath}`;
+};
+
 function Checkout() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -40,7 +48,7 @@ function Checkout() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [showPixModal, setShowPixModal] = useState(false);
-  const [pixData, setPixData] = useState({ qrCode: "", pixCode: "" });
+  const [pixData, setPixData] = useState({ qrCode: "", pixCode: "", expiresAt: "" });
 
   const [formData, setFormData] = useState({
     customerName: "",
@@ -54,21 +62,34 @@ function Checkout() {
     cardCvv: "",
   });
 
-  const pagamentoBaseBody = useMemo(
+  const cardPayload = useMemo(
     () => ({
       nome_produto: selectedPlan.label,
       descricao: `${selectedPlan.description} (${billingCycle})`,
       quantidade: 1,
       valor_centavos: amountInCents,
       nome: formData.customerName,
-      email: formData.customerEmail,
       celular: formData.customerPhone,
+      email: formData.customerEmail,
       cpf_cnpj: formData.customerTaxId,
       retorno_url: window.location.href,
+      completion_url: getAbsoluteHashUrl("/obrigado"),
     }),
     [amountInCents, billingCycle, formData, selectedPlan]
   );
 
+  const pixPayload = useMemo(
+    () => ({
+      amount: amountInCents,
+      expiresIn: 1800,
+      description: `${selectedPlan.label} (${billingCycle})`,
+      name: formData.customerName,
+      cellphone: formData.customerPhone,
+      email: formData.customerEmail,
+      taxId: formData.customerTaxId,
+    }),
+    [amountInCents, billingCycle, formData, selectedPlan]
+  );
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -107,22 +128,19 @@ function Checkout() {
   };
 
   const getPixValues = (responseData) => {
-    const qrCode =
-      responseData?.qr_code ||
-      responseData?.qrCode ||
-      responseData?.data?.qr_code ||
-      responseData?.data?.qrCode ||
-      "";
+    const pix = responseData?.pix || responseData?.data?.pix || {};
 
     const pixCode =
+      pix?.pix_copia_cola ||
       responseData?.pix_copia_cola ||
-      responseData?.pixCopiaCola ||
-      responseData?.pix_code ||
       responseData?.data?.pix_copia_cola ||
-      responseData?.data?.pixCode ||
       "";
 
-    return { qrCode, pixCode };
+    const qrCodeBase64 = pix?.qr_code_base64 || responseData?.qr_code_base64 || "";
+    const qrCode = qrCodeBase64 ? `data:image/png;base64,${qrCodeBase64}` : "";
+    const expiresAt = pix?.expires_at || responseData?.expires_at || "";
+
+    return { qrCode, pixCode, expiresAt };
   };
 
   const getCardRedirect = (responseData) =>
@@ -139,12 +157,12 @@ function Checkout() {
     setIsLoading(true);
     setErrorMessage("");
 
-    const endpoint = `${API_BASE_URL}/pagamentos`;
+    const isPix = paymentMethod === "pix";
+    const endpoint = isPix
+      ? `${API_BASE_URL}/pagamentos/pix`
+      : `${API_BASE_URL}/pagamentos/cartao`;
 
-    const payload = {
-      metodo_pagamento: paymentMethod,
-      ...pagamentoBaseBody,
-    };
+    const payload = isPix ? pixPayload : cardPayload;
 
     try {
       const response = await fetch(endpoint, {
@@ -298,7 +316,7 @@ function Checkout() {
                       <Input label="CVV" name="cardCvv" value={formData.cardCvv} onChange={handleInputChange} />
                     </div>
                     <p className="text-xs text-gray-400">
-                      Os dados enviados seguem o body documentado e usam <code>/api/pagamentos</code> com <code>metodo_pagamento</code>.
+                      Os dados enviados seguem o body de <code>/api/pagamentos/cartao</code>, incluindo <code>completion_url</code>.
                     </p>
                   </div>
                 )}
@@ -388,6 +406,12 @@ function Checkout() {
               <button onClick={handleCopyPix} className="w-full bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-3 rounded-lg">
                 Copiar Pix copia e cola
               </button>
+
+              {pixData.expiresAt && (
+                <p className="text-xs text-gray-400 text-center">
+                  Expira em: {new Date(pixData.expiresAt).toLocaleString("pt-BR")}
+                </p>
+              )}
 
               <button
                 onClick={() => setShowPixModal(false)}
