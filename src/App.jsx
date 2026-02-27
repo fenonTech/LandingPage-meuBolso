@@ -11,6 +11,7 @@ import CreateAccount from "./components/CreateAccount";
 import Login from "./components/Login";
 import ForgotPassword from "./components/ForgotPassword";
 import ScrollToTop from "./components/ScrollToTop";
+import Checkout from "./components/Checkout";
 
 function App() {
   const navigate = useNavigate();
@@ -129,6 +130,10 @@ function App() {
             <Plans isRenewal={false} />
           </div>
         }
+      />
+      <Route
+        path="/checkout"
+        element={<Checkout />}
       />
       <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
