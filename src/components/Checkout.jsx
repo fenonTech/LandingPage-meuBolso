@@ -24,6 +24,8 @@ const formatCurrency = (valueInCents) =>
     (valueInCents || 0) / 100
   );
 
+const API_BASE_URL = "https://backend-pearl-rho-82.vercel.app/api";
+
 function Checkout() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -137,7 +139,10 @@ function Checkout() {
     setIsLoading(true);
     setErrorMessage("");
 
-    const endpoint = paymentMethod === "pix" ? "/api/pagamentos/pix" : "/api/pagamentos/cartao";
+    const endpoint =
+      paymentMethod === "pix"
+        ? `${API_BASE_URL}/pagamentos/pix`
+        : `${API_BASE_URL}/pagamentos/cartao`;
 
     try {
       const response = await fetch(endpoint, {
