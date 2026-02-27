@@ -259,6 +259,18 @@ function Checkout() {
         throw new Error("A API não retornou checkout_url para pagamento com cartão.");
       }
 
+      // Salva billingId no localStorage para ativar assinatura ao retornar
+      const billingId =
+        data?.pagamento?.data?.id ||
+        data?.data?.id ||
+        null;
+      if (billingId) {
+        localStorage.setItem(
+          "pendingCardBilling",
+          JSON.stringify({ billingId, isTeste: true }),
+        );
+      }
+
       window.location.href = redirectUrl;
     } catch (error) {
       setErrorMessage(error.message || "Erro ao criar pagamento.");
