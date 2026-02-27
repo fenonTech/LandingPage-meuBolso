@@ -2,7 +2,8 @@ import {
   useScrollAnimation,
   useStaggeredAnimation,
 } from "../hooks/useScrollAnimation";
-import { useState, memo, useMemo, useCallback } from "react";
+import { memo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Plans({ isRenewal = false }) {
   const [sectionRef, isVisible] = useScrollAnimation(0.2);
@@ -13,6 +14,7 @@ function Plans({ isRenewal = false }) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [hoveredCard, setHoveredCard] = useState(null);
   const [selectedPeriod, setSelectedPeriod] = useState("mensal");
+  const navigate = useNavigate();
 
   const pricing = {
     mensal: {
@@ -29,24 +31,6 @@ function Plans({ isRenewal = false }) {
       plan1: { price: "78,00", savings: "34%" },
       plan2: { price: "178,80", savings: "29%" },
       plan3: { price: "310,80", savings: "35%" },
-    },
-  };
-
-  const checkoutLinks = {
-    plan1: {
-      mensal: "https://pay.cakto.com.br/s3ichri_700620",
-      trimestral: "https://pay.cakto.com.br/vgdxicp",
-      anual: "https://pay.cakto.com.br/wsjzmu6",
-    },
-    plan2: {
-      mensal: "https://pay.cakto.com.br/zo44ztc",
-      trimestral: "https://pay.cakto.com.br/5fs6nt7",
-      anual: "https://pay.cakto.com.br/3kedvj8",
-    },
-    plan3: {
-      mensal: "https://pay.cakto.com.br/fv8tf85",
-      trimestral: "https://pay.cakto.com.br/fvs5vdu",
-      anual: "https://pay.cakto.com.br/cug8wxj",
     },
   };
 
@@ -251,7 +235,7 @@ function Plans({ isRenewal = false }) {
                   if (isRenewal) {
                     window.location.hash = "/planos";
                   } else {
-                    window.open(checkoutLinks.plan1[selectedPeriod], "_blank");
+                    navigate(`/checkout?plano=plan1&periodo=${selectedPeriod}`);
                   }
                 }}
               >
@@ -362,7 +346,7 @@ function Plans({ isRenewal = false }) {
                   if (isRenewal) {
                     window.location.hash = "/planos";
                   } else {
-                    window.open(checkoutLinks.plan2[selectedPeriod], "_blank");
+                    navigate(`/checkout?plano=plan2&periodo=${selectedPeriod}`);
                   }
                 }}
               >
@@ -455,10 +439,7 @@ function Plans({ isRenewal = false }) {
                   if (isRenewal) {
                     window.location.hash = "/planos";
                   } else {
-                    const checkoutUrl = checkoutLinks.plan3[selectedPeriod];
-                    if (checkoutUrl) {
-                      window.open(checkoutUrl, "_blank");
-                    }
+                    navigate(`/checkout?plano=plan3&periodo=${selectedPeriod}`);
                   }
                 }}
               >
