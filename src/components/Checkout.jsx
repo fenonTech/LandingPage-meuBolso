@@ -25,6 +25,7 @@ const formatCurrency = (valueInCents) =>
   );
 
 const API_BASE_URL = "https://backend-pearl-rho-82.vercel.app/api";
+const TEST_PAYMENTS_BASE_PATH = "pagamentos/teste";
 
 const getAbsoluteHashUrl = (hashPath) => {
   if (typeof window === "undefined") {
@@ -49,7 +50,6 @@ function Checkout() {
   const [errorMessage, setErrorMessage] = useState("");
   const [showPixModal, setShowPixModal] = useState(false);
   const [pixData, setPixData] = useState({ qrCode: "", pixCode: "", expiresAt: "" });
-  const [cardCheckoutUrl, setCardCheckoutUrl] = useState("");
 
   const [formData, setFormData] = useState({
     customerName: "",
@@ -163,12 +163,11 @@ function Checkout() {
   const createPayment = async () => {
     setIsLoading(true);
     setErrorMessage("");
-    setCardCheckoutUrl("");
 
     const isPix = paymentMethod === "pix";
     const endpoint = isPix
-      ? `${API_BASE_URL}/pagamentos/pix`
-      : `${API_BASE_URL}/pagamentos/cartao`;
+      ? `${API_BASE_URL}/${TEST_PAYMENTS_BASE_PATH}/pix`
+      : `${API_BASE_URL}/${TEST_PAYMENTS_BASE_PATH}/cartao`;
 
     const payload = isPix ? pixPayload : cardPayload;
 
@@ -219,7 +218,7 @@ function Checkout() {
         throw new Error("A API não retornou checkout_url para pagamento com cartão.");
       }
 
-      setCardCheckoutUrl(redirectUrl);
+      window.location.href = redirectUrl;
     } catch (error) {
       setErrorMessage(error.message || "Erro ao criar pagamento.");
     } finally {
@@ -306,16 +305,6 @@ function Checkout() {
                 {paymentMethod === "cartao" && (
                   <div className="rounded-xl border border-dark-700 bg-black/20 p-4 space-y-4">
                     <h3 className="text-yellow-400 font-semibold">Pagamento com cartão</h3>
-                    {cardCheckoutUrl && (
-                      <a
-                        href={cardCheckoutUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="w-full inline-flex justify-center bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-3 rounded-lg"
-                      >
-                        Ir para o pagamento com cartão
-                      </a>
-                    )}
                   </div>
                 )}
 
