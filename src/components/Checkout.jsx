@@ -303,13 +303,6 @@ function Checkout() {
                   </button>
                 </div>
 
-                {paymentMethod === "pix" && (
-                  <div className="rounded-xl border border-dark-700 bg-black/20 p-4">
-                    <p className="text-gray-200 text-lg font-medium">Escolha Pix para pagar.</p>
-                    <p className="text-gray-200 text-lg font-medium">Escolha Pix para pagar.</p>
-                  </div>
-                )}
-
                 {paymentMethod === "cartao" && (
                   <div className="rounded-xl border border-dark-700 bg-black/20 p-4 space-y-4">
                     <h3 className="text-yellow-400 font-semibold">Pagamento com cartão</h3>
