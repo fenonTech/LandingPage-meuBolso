@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 const plans = {
@@ -50,6 +50,9 @@ function Checkout() {
   const [errorMessage, setErrorMessage] = useState("");
   const [showPixModal, setShowPixModal] = useState(false);
   const [pixData, setPixData] = useState({ qrCode: "", pixCode: "", expiresAt: "" });
+  const [pixId, setPixId] = useState(null);
+  const [pixPollStatus, setPixPollStatus] = useState(""); // "" | "checking" | "paid" | "error"
+  const pollingRef = useRef(null);
 
   const [formData, setFormData] = useState({
     customerName: "",
@@ -115,6 +118,41 @@ function Checkout() {
     return true;
   };
 
+  // Polling: verifica o status do PIX a cada 5s enquanto o modal estiver aberto
+  useEffect(() => {
+    if (!showPixModal || !pixId) return;
+
+    const poll = async () => {
+      try {
+        const res = await fetch(
+          `${API_BASE_URL}/${TEST_PAYMENTS_BASE_PATH}/pix/${pixId}/status`,
+          { headers: { "Content-Type": "application/json" } }
+        );
+        const statusData = await res.json().catch(() => ({}));
+
+        if (statusData?.pix?.pago === true) {
+          clearInterval(pollingRef.current);
+          setPixPollStatus("paid");
+          setShowPixModal(false);
+          setPixId(null);
+          navigate("/obrigado");
+        }
+      } catch {
+        // ignora erros de polling silenciosamente
+      }
+    };
+
+    pollingRef.current = setInterval(poll, 5000);
+    return () => clearInterval(pollingRef.current);
+  }, [showPixModal, pixId, navigate]);
+
+  const handleClosePixModal = () => {
+    clearInterval(pollingRef.current);
+    setShowPixModal(false);
+    setPixId(null);
+    setPixPollStatus("");
+  };
+
   const handleNextStep = (e) => {
     e.preventDefault();
     if (!validateStep1()) {
@@ -146,8 +184,9 @@ function Checkout() {
       : "";
 
     const expiresAt = pix?.expires_at || responseData?.expires_at || "";
+    const id = pix?.id || responseData?.data?.id || null;
 
-    return { qrCode, pixCode, expiresAt };
+    return { qrCode, pixCode, expiresAt, id };
   };
 
   const getCardRedirect = (responseData) =>
@@ -208,6 +247,8 @@ function Checkout() {
         }
 
         setPixData(parsedPix);
+        setPixId(parsedPix.id);
+        setPixPollStatus("checking");
         setShowPixModal(true);
         return;
       }
@@ -368,7 +409,7 @@ function Checkout() {
           <div className="w-full max-w-lg bg-dark-800 border border-dark-700 rounded-2xl overflow-hidden">
             <div className="px-5 py-4 border-b border-dark-700 flex items-center justify-between">
               <h3 className="text-xl font-bold">Pagamento com Pix</h3>
-              <button onClick={() => setShowPixModal(false)} className="text-gray-400 hover:text-white text-2xl leading-none">
+              <button onClick={handleClosePixModal} className="text-gray-400 hover:text-white text-2xl leading-none">
                 ×
               </button>
             </div>
@@ -400,8 +441,14 @@ function Checkout() {
                 </p>
               )}
 
+              {pixPollStatus === "checking" && (
+                <p className="text-xs text-gray-400 text-center animate-pulse">
+                  Aguardando confirmação do pagamento...
+                </p>
+              )}
+
               <button
-                onClick={() => setShowPixModal(false)}
+                onClick={handleClosePixModal}
                 className="w-full bg-transparent border border-dark-700 hover:border-yellow-400 text-white font-bold py-3 rounded-lg"
               >
                 Cancelar
