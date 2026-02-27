@@ -306,6 +306,7 @@ function Checkout() {
                 {paymentMethod === "pix" && (
                   <div className="rounded-xl border border-dark-700 bg-black/20 p-4">
                     <p className="text-gray-200 text-lg font-medium">Escolha Pix para pagar.</p>
+                    <p className="text-gray-200 text-lg font-medium">Escolha Pix para pagar.</p>
                   </div>
                 )}
 
