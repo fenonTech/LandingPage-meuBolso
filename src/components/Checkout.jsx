@@ -139,10 +139,12 @@ function Checkout() {
     setIsLoading(true);
     setErrorMessage("");
 
-    const endpoint =
-      paymentMethod === "pix"
-        ? `${API_BASE_URL}/pagamentos/pix`
-        : `${API_BASE_URL}/pagamentos/cartao`;
+    const endpoint = `${API_BASE_URL}/pagamentos`;
+
+    const payload = {
+      metodo_pagamento: paymentMethod,
+      ...pagamentoBaseBody,
+    };
 
     try {
       const response = await fetch(endpoint, {
@@ -150,14 +152,27 @@ function Checkout() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(pagamentoBaseBody),
+        body: JSON.stringify(payload),
       });
 
       const data = await response.json().catch(() => ({}));
 
       if (!response.ok) {
-        const message = data?.message || data?.erro || "Não foi possível criar o pagamento.";
-        throw new Error(message);
+        const providerStatus = data?.erro?.provider_status;
+        const providerData = data?.erro?.provider_data;
+        const providerMessage =
+          providerData?.message || providerData?.error || providerData?.description || "";
+        const baseMessage =
+          data?.erro?.message || data?.message || data?.erro || "Não foi possível criar o pagamento.";
+
+        const details = [
+          providerStatus ? `status provedor: ${providerStatus}` : "",
+          providerMessage,
+        ]
+          .filter(Boolean)
+          .join(" | ");
+
+        throw new Error(details ? `${baseMessage} (${details})` : baseMessage);
       }
 
       if (paymentMethod === "pix") {
@@ -283,7 +298,7 @@ function Checkout() {
                       <Input label="CVV" name="cardCvv" value={formData.cardCvv} onChange={handleInputChange} />
                     </div>
                     <p className="text-xs text-gray-400">
-                      Os dados enviados seguem exatamente o body documentado em <code>/api/pagamentos/cartao</code>.
+                      Os dados enviados seguem o body documentado e usam <code>/api/pagamentos</code> com <code>metodo_pagamento</code>.
                     </p>
                   </div>
                 )}
