@@ -25,7 +25,7 @@ const formatCurrency = (valueInCents) =>
   );
 
 const API_BASE_URL = "https://backend-pearl-rho-82.vercel.app/api";
-const TEST_PAYMENTS_BASE_PATH = "pagamentos/teste";
+const PAYMENTS_BASE_PATH = "pagamentos";
 
 const getAbsoluteHashUrl = (hashPath) => {
   if (typeof window === "undefined") {
@@ -125,7 +125,7 @@ function Checkout() {
     const poll = async () => {
       try {
         const res = await fetch(
-          `${API_BASE_URL}/${TEST_PAYMENTS_BASE_PATH}/pix/${pixId}/status`,
+          `${API_BASE_URL}/${PAYMENTS_BASE_PATH}/pix/${pixId}/status`,
           { headers: { "Content-Type": "application/json" } }
         );
         const statusData = await res.json().catch(() => ({}));
@@ -205,8 +205,8 @@ function Checkout() {
 
     const isPix = paymentMethod === "pix";
     const endpoint = isPix
-      ? `${API_BASE_URL}/${TEST_PAYMENTS_BASE_PATH}/pix`
-      : `${API_BASE_URL}/${TEST_PAYMENTS_BASE_PATH}/cartao`;
+      ? `${API_BASE_URL}/${PAYMENTS_BASE_PATH}/pix`
+      : `${API_BASE_URL}/${PAYMENTS_BASE_PATH}/cartao`;
 
     const payload = isPix ? pixPayload : cardPayload;
 
@@ -272,7 +272,7 @@ function Checkout() {
             nomeProduto: selectedPlan.label,
             email: formData.customerEmail,
             telefone: formData.customerPhone,
-            isTeste: true,
+            isTeste: false,
           }),
         );
       }
