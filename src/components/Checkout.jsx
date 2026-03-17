@@ -1,20 +1,43 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
+// ─── Configuração de ambiente ──────────────────────────────────────────────────
+// Altere IS_TEST para false quando for para produção
+const IS_TEST = true;
+
+const API_BASE_URL = "https://backend-pearl-rho-82.vercel.app/api";
+
+const ENDPOINTS = {
+  pix:        IS_TEST ? "pagamentos/teste/pix"        : "pagamentos/pix",
+  pixStatus:  IS_TEST ? "pagamentos/teste/pix"        : "pagamentos/pix",
+  assinatura: IS_TEST ? "pagamentos/teste/assinatura" : "pagamentos/assinatura",
+};
+
+// Mapeamento plan1/2/3 → nome do plano no backend
+const PLAN_NAMES = {
+  plan1: "essencial",
+  plan2: "inteligente",
+  plan3: "visionario",
+};
+
+// AbacatePay só tem ciclos MONTHLY e ANNUALLY — trimestral recai em mensal
+const normalizeCiclo = (periodo) => (periodo === "anual" ? "anual" : "mensal");
+
+// ─── Dados dos planos ──────────────────────────────────────────────────────────
 const plans = {
   plan1: {
-    label: "Assinatura Essencial",
-    description: "Plano mensal",
+    label: "Plano Essencial",
+    description: "Assinatura recorrente",
     values: { mensal: 990, trimestral: 2670, anual: 7800 },
   },
   plan2: {
-    label: "Assinatura Intermediária",
-    description: "Plano mensal",
+    label: "Plano Inteligente",
+    description: "Assinatura recorrente",
     values: { mensal: 2090, trimestral: 5667, anual: 17880 },
   },
   plan3: {
-    label: "Assinatura Premium",
-    description: "Plano mensal",
+    label: "Plano Visionário",
+    description: "Assinatura recorrente",
     values: { mensal: 3990, trimestral: 11043, anual: 31080 },
   },
 };
@@ -24,17 +47,69 @@ const formatCurrency = (valueInCents) =>
     (valueInCents || 0) / 100
   );
 
-const API_BASE_URL = "https://backend-pearl-rho-82.vercel.app/api";
-const PAYMENTS_BASE_PATH = "pagamentos";
-
 const getAbsoluteHashUrl = (hashPath) => {
-  if (typeof window === "undefined") {
-    return hashPath;
-  }
-
+  if (typeof window === "undefined") return hashPath;
   return `${window.location.origin}${window.location.pathname}#${hashPath}`;
 };
 
+// ─── Helpers de resposta ───────────────────────────────────────────────────────
+const getPixValues = (responseData) => {
+  const pix = responseData?.pix || responseData?.data?.pix || {};
+
+  const pixCode =
+    pix?.pix_copia_cola ||
+    responseData?.pix_copia_cola ||
+    responseData?.data?.pix_copia_cola ||
+    "";
+
+  const qrSource =
+    pix?.qr_code_base64 ||
+    pix?.qr_code ||
+    responseData?.qr_code_base64 ||
+    responseData?.qr_code ||
+    "";
+
+  const qrCode = qrSource
+    ? qrSource.startsWith("data:image") || qrSource.startsWith("http")
+      ? qrSource
+      : `data:image/png;base64,${qrSource}`
+    : "";
+
+  const expiresAt = pix?.expires_at || responseData?.expires_at || "";
+  const id = pix?.id || responseData?.data?.id || null;
+
+  return { qrCode, pixCode, expiresAt, id };
+};
+
+const getCardRedirect = (responseData) =>
+  responseData?.checkout_url ||
+  responseData?.payment_url ||
+  responseData?.redirect_url ||
+  responseData?.url ||
+  responseData?.data?.checkout_url ||
+  responseData?.data?.payment_url ||
+  responseData?.data?.redirect_url ||
+  "";
+
+const extractErrorMessage = (data) => {
+  const providerStatus = data?.erro?.provider_status;
+  const providerData = data?.erro?.provider_data;
+  const providerMessage =
+    providerData?.message || providerData?.error || providerData?.description || "";
+  const baseMessage =
+    data?.erro?.message || data?.message || data?.erro || "Não foi possível criar o pagamento.";
+
+  const details = [
+    providerStatus ? `status provedor: ${providerStatus}` : "",
+    providerMessage,
+  ]
+    .filter(Boolean)
+    .join(" | ");
+
+  return details ? `${baseMessage} (${details})` : baseMessage;
+};
+
+// ─── Componente principal ──────────────────────────────────────────────────────
 function Checkout() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -51,7 +126,7 @@ function Checkout() {
   const [showPixModal, setShowPixModal] = useState(false);
   const [pixData, setPixData] = useState({ qrCode: "", pixCode: "", expiresAt: "" });
   const [pixId, setPixId] = useState(null);
-  const [pixPollStatus, setPixPollStatus] = useState(""); // "" | "checking" | "paid" | "error"
+  const [pixPollStatus, setPixPollStatus] = useState("");
   const pollingRef = useRef(null);
 
   const [formData, setFormData] = useState({
@@ -61,22 +136,7 @@ function Checkout() {
     customerPhone: "",
   });
 
-  const cardPayload = useMemo(
-    () => ({
-      nome_produto: selectedPlan.label,
-      descricao: `${selectedPlan.description} (${billingCycle})`,
-      quantidade: 1,
-      valor_centavos: amountInCents,
-      nome: formData.customerName,
-      celular: formData.customerPhone,
-      email: formData.customerEmail,
-      cpf_cnpj: formData.customerTaxId,
-      retorno_url: window.location.href,
-      completion_url: getAbsoluteHashUrl("/obrigado"),
-    }),
-    [amountInCents, billingCycle, formData, selectedPlan]
-  );
-
+  // Payload para PIX (precisa dos dados do cliente)
   const pixPayload = useMemo(
     () => ({
       amount: amountInCents,
@@ -90,16 +150,24 @@ function Checkout() {
     [amountInCents, billingCycle, formData, selectedPlan]
   );
 
+  // Payload para assinatura recorrente com cartão
+  const assinaturaPayload = useMemo(
+    () => ({
+      plano: PLAN_NAMES[planId] || "essencial",
+      ciclo: normalizeCiclo(billingCycle),
+      retorno_url: window.location.href,
+      completion_url: getAbsoluteHashUrl("/obrigado"),
+    }),
+    [planId, billingCycle]
+  );
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleCopyPix = async () => {
-    if (!pixData.pixCode) {
-      return;
-    }
-
+    if (!pixData.pixCode) return;
     try {
       await navigator.clipboard.writeText(pixData.pixCode);
       alert("Código Pix copiado com sucesso!");
@@ -108,24 +176,24 @@ function Checkout() {
     }
   };
 
-  const validateStep1 = () => {
+  // Valida dados do cliente (obrigatório apenas para PIX)
+  const validateCustomerForm = () => {
     if (!formData.customerName || !formData.customerEmail || !formData.customerTaxId || !formData.customerPhone) {
-      setErrorMessage("Preencha Nome, Email, Cpf/Cnpj e Telefone para continuar.");
+      setErrorMessage("Preencha Nome, Email, CPF/CNPJ e Telefone para continuar.");
       return false;
     }
-
     setErrorMessage("");
     return true;
   };
 
-  // Polling: verifica o status do PIX a cada 5s enquanto o modal estiver aberto
+  // Polling: verifica status do PIX a cada 5s enquanto o modal estiver aberto
   useEffect(() => {
     if (!showPixModal || !pixId) return;
 
     const poll = async () => {
       try {
         const res = await fetch(
-          `${API_BASE_URL}/${PAYMENTS_BASE_PATH}/pix/${pixId}/status`,
+          `${API_BASE_URL}/${ENDPOINTS.pixStatus}/${pixId}/status`,
           { headers: { "Content-Type": "application/json" } }
         );
         const statusData = await res.json().catch(() => ({}));
@@ -155,91 +223,35 @@ function Checkout() {
 
   const handleNextStep = (e) => {
     e.preventDefault();
-    if (!validateStep1()) {
-      return;
-    }
+    // Para cartão, dados do cliente não são enviados à API — o AbacatePay coleta no checkout
+    if (paymentMethod === "pix" && !validateCustomerForm()) return;
+    setErrorMessage("");
     setStep(2);
   };
-
-  const getPixValues = (responseData) => {
-    const pix = responseData?.pix || responseData?.data?.pix || {};
-
-    const pixCode =
-      pix?.pix_copia_cola ||
-      responseData?.pix_copia_cola ||
-      responseData?.data?.pix_copia_cola ||
-      "";
-
-    const qrSource =
-      pix?.qr_code_base64 ||
-      pix?.qr_code ||
-      responseData?.qr_code_base64 ||
-      responseData?.qr_code ||
-      "";
-
-    const qrCode = qrSource
-      ? qrSource.startsWith("data:image") || qrSource.startsWith("http")
-        ? qrSource
-        : `data:image/png;base64,${qrSource}`
-      : "";
-
-    const expiresAt = pix?.expires_at || responseData?.expires_at || "";
-    const id = pix?.id || responseData?.data?.id || null;
-
-    return { qrCode, pixCode, expiresAt, id };
-  };
-
-  const getCardRedirect = (responseData) =>
-    responseData?.checkout_url ||
-    responseData?.payment_url ||
-    responseData?.redirect_url ||
-    responseData?.url ||
-    responseData?.data?.checkout_url ||
-    responseData?.data?.payment_url ||
-    responseData?.data?.redirect_url ||
-    "";
 
   const createPayment = async () => {
     setIsLoading(true);
     setErrorMessage("");
 
     const isPix = paymentMethod === "pix";
-    const endpoint = isPix
-      ? `${API_BASE_URL}/${PAYMENTS_BASE_PATH}/pix`
-      : `${API_BASE_URL}/${PAYMENTS_BASE_PATH}/cartao`;
-
-    const payload = isPix ? pixPayload : cardPayload;
 
     try {
-      const response = await fetch(endpoint, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+      let response, data;
 
-      const data = await response.json().catch(() => ({}));
+      if (isPix) {
+        // ── PIX: pagamento avulso ──────────────────────────────────────────
+        response = await fetch(`${API_BASE_URL}/${ENDPOINTS.pix}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(pixPayload),
+        });
 
-      if (!response.ok) {
-        const providerStatus = data?.erro?.provider_status;
-        const providerData = data?.erro?.provider_data;
-        const providerMessage =
-          providerData?.message || providerData?.error || providerData?.description || "";
-        const baseMessage =
-          data?.erro?.message || data?.message || data?.erro || "Não foi possível criar o pagamento.";
+        data = await response.json().catch(() => ({}));
 
-        const details = [
-          providerStatus ? `status provedor: ${providerStatus}` : "",
-          providerMessage,
-        ]
-          .filter(Boolean)
-          .join(" | ");
+        if (!response.ok) {
+          throw new Error(extractErrorMessage(data));
+        }
 
-        throw new Error(details ? `${baseMessage} (${details})` : baseMessage);
-      }
-
-      if (paymentMethod === "pix") {
         const parsedPix = getPixValues(data);
 
         if (!parsedPix.qrCode && !parsedPix.pixCode) {
@@ -253,28 +265,23 @@ function Checkout() {
         return;
       }
 
+      // ── Cartão: assinatura recorrente AbacatePay v2 ────────────────────
+      response = await fetch(`${API_BASE_URL}/${ENDPOINTS.assinatura}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(assinaturaPayload),
+      });
+
+      data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(extractErrorMessage(data));
+      }
+
       const redirectUrl = getCardRedirect(data);
 
       if (!redirectUrl) {
-        throw new Error("A API não retornou checkout_url para pagamento com cartão.");
-      }
-
-      // Salva dados do cliente no localStorage para ativar assinatura ao retornar
-      const billingId =
-        data?.pagamento?.data?.id ||
-        data?.data?.id ||
-        null;
-      if (billingId) {
-        localStorage.setItem(
-          "pendingCardBilling",
-          JSON.stringify({
-            billingId,
-            nomeProduto: selectedPlan.label,
-            email: formData.customerEmail,
-            telefone: formData.customerPhone,
-            isTeste: false,
-          }),
-        );
+        throw new Error("A API não retornou checkout_url para a assinatura.");
       }
 
       window.location.href = redirectUrl;
@@ -286,11 +293,11 @@ function Checkout() {
   };
 
   const handlePayNow = async () => {
-    if (!validateStep1()) {
+    // Para PIX, valida dados do cliente; para cartão, os dados são coletados pelo AbacatePay
+    if (paymentMethod === "pix" && !validateCustomerForm()) {
       setStep(1);
       return;
     }
-
     await createPayment();
   };
 
@@ -303,6 +310,12 @@ function Checkout() {
         >
           ← Voltar
         </button>
+
+        {IS_TEST && (
+          <div className="mb-4 rounded-lg border border-yellow-400/40 bg-yellow-400/10 text-yellow-300 px-4 py-2 text-xs font-semibold">
+            Modo de teste ativo — nenhuma cobrança real será realizada.
+          </div>
+        )}
 
         <div className="grid lg:grid-cols-3 gap-6">
           <section className="lg:col-span-2 bg-dark-800 border border-dark-700 rounded-2xl p-6">
@@ -320,12 +333,17 @@ function Checkout() {
 
             {step === 1 ? (
               <form onSubmit={handleNextStep} className="space-y-6 mt-6">
-                <p className="text-gray-300">Preencha os dados para continuar para o pagamento.</p>
+                <p className="text-gray-300">
+                  Preencha seus dados para continuar.{" "}
+                  <span className="text-gray-500 text-sm">
+                    (obrigatório para PIX; para cartão, os dados são coletados pelo AbacatePay)
+                  </span>
+                </p>
                 <div className="grid sm:grid-cols-2 gap-4">
-                  <Input label="Nome" name="customerName" value={formData.customerName} onChange={handleInputChange} required />
-                  <Input label="Email" type="email" name="customerEmail" value={formData.customerEmail} onChange={handleInputChange} required />
-                  <Input label="Cpf/Cnpj" name="customerTaxId" value={formData.customerTaxId} onChange={handleInputChange} required />
-                  <Input label="Telefone" name="customerPhone" value={formData.customerPhone} onChange={handleInputChange} required />
+                  <Input label="Nome" name="customerName" value={formData.customerName} onChange={handleInputChange} />
+                  <Input label="Email" type="email" name="customerEmail" value={formData.customerEmail} onChange={handleInputChange} />
+                  <Input label="CPF/CNPJ" name="customerTaxId" value={formData.customerTaxId} onChange={handleInputChange} />
+                  <Input label="Telefone" name="customerPhone" value={formData.customerPhone} onChange={handleInputChange} />
                 </div>
 
                 <button type="submit" className="w-full bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-3 rounded-lg">
@@ -357,13 +375,22 @@ function Checkout() {
                         : "bg-black/30 text-white border-dark-700 hover:border-yellow-400"
                     }`}
                   >
-                    Crédito
+                    Cartão (Recorrente)
                   </button>
                 </div>
 
                 {paymentMethod === "cartao" && (
-                  <div className="rounded-xl border border-dark-700 bg-black/20 p-4 space-y-4">
-                    <h3 className="text-yellow-400 font-semibold">Pagamento com cartão</h3>
+                  <div className="rounded-xl border border-dark-700 bg-black/20 p-4 space-y-2">
+                    <h3 className="text-yellow-400 font-semibold">Assinatura recorrente com cartão</h3>
+                    <p className="text-gray-400 text-sm">
+                      Você será redirecionado para a página segura do AbacatePay para inserir os dados do cartão.
+                      A assinatura será renovada automaticamente.
+                    </p>
+                    {billingCycle === "trimestral" && (
+                      <p className="text-yellow-300 text-xs">
+                        ⚠ O ciclo trimestral não está disponível para assinatura recorrente — será cobrado mensalmente.
+                      </p>
+                    )}
                   </div>
                 )}
 
@@ -411,7 +438,7 @@ function Checkout() {
             </div>
             <div className="border-t border-dark-700 pt-4">
               <p className="text-xs text-gray-400">
-                Os dados do checkout são enviados de forma automática para a API de pagamentos.
+                Os dados do checkout são enviados de forma segura para a API de pagamentos.
               </p>
             </div>
 
