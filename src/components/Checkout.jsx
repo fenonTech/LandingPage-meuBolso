@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 // ─── Configuração de ambiente ──────────────────────────────────────────────────
 // Altere IS_TEST para false quando for para produção
-const IS_TEST = true;
+const IS_TEST = false;
 
 const API_BASE_URL = "https://backend-pearl-rho-82.vercel.app/api";
 
